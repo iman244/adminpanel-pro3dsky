@@ -1,13 +1,79 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+/* *,
+*:before,
+*:after {
+    box-sizing: border-box;
+} */
+
+:root {
+    --navLogo-color: #696969;
+    --navPadding: 15px;
+
+    --page-content: 90vh;
+
+    --basic: #4182aa;
+    --basicHover: #145278;
+
+    --card-desc-fontColor: #aaa;
+    --cardDownload: #f7f7f7;
+    --card-smallScreen-width: 80vw;
+    --card-mediumScreen-width: calc((100vw - 165px - 4 * 30px - 1vw) / 2);
+    --card-largeScreen-width: calc((100vw - 165px - 4 * 30px - 1vw) / 4);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    color: #4f4f4f;
+    cursor: default;
+}
+
+html,
+body,
+#root,
+.page {
+    box-sizing: border-box;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+
+#root {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    text-transform: capitalize;
+    margin: 0;
+}
+
+input,
+div {
+    outline: 0;
+}
+
+label {
+    cursor: default;
+}
+label {
+    display: inline-block;
+}
+
+button,
+ul,
+li,
+a {
+    all: unset;
+}
+
+div.hr {
+    border-top: 1px solid rgba(0, 0, 0, 0.15);
 }
