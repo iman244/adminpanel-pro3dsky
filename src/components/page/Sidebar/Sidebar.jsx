@@ -6,9 +6,7 @@ import { sidebarList } from "./SidebarData";
 
 const Sidebar = () => {
     const { pathname } = window.location;
-    useEffect(() => {
-        console.log([pathname]);
-    });
+    useEffect(() => {});
     return (
         <>
             <ul className="sidebar">
