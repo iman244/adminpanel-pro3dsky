@@ -1,6 +1,6 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import Form from "./Form";
+import Form from "../Form/Form";
 
 const fields = [
     {

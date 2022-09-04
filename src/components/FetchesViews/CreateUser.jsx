@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import Form from "./Form";
-import "./form.css";
+import { useMutation, useQuery } from "react-query";
+import Form from "../Form/Form";
+const axios = require("axios").default;
 
 const fields = [
     {
@@ -18,6 +19,14 @@ const fields = [
         required: true,
         error: "minimum character is 6",
     },
+    {
+        id: 3,
+        type: "checkbox",
+        name: "isAdmin",
+        required: false,
+        error: "",
+        divClassName: "isAdmin",
+    },
 ];
 
 const CreateUser = () => {
@@ -27,7 +36,21 @@ const CreateUser = () => {
         watch,
         formState: { errors },
     } = useForm();
-    const onSubmit = (data) => console.log(data);
+    const createUserFetch = useMutation((data) => {
+        return axios.post("http://127.0.0.1:3000/users/register", data, {
+            withCredentials: true,
+        });
+    });
+    const [credentials, setCredentials] = useState(null);
+
+    const onSubmit = (data) => {
+        setCredentials(data);
+        createUserFetch.mutate(data);
+    };
+
+    useEffect(() => {
+        console.log("front state: ", credentials);
+    });
 
     return (
         <>
@@ -36,6 +59,9 @@ const CreateUser = () => {
                 use={{ register, handleSubmit, errors, onSubmit }}
                 fields={fields}
             />
+            {createUserFetch.isLoading && <span>Loading</span>}
+            {createUserFetch.isError && <span>Error</span>}
+            {createUserFetch.isSuccess && <span>success</span>}
         </>
     );
 };

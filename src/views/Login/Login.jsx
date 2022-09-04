@@ -1,83 +1,80 @@
 import "./b-login.css";
 import "./s-login.css";
-import React, { useEffect, useState } from "react";
-import { LoginFormElements } from "./LoginData";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Form from "../../components/Form/Form";
+import { useForm } from "react-hook-form";
+import { LoginServiceContext } from "../../context/LoginService";
 
-/* 
-issues: label doesnt work completely
-*/
+const FormFields = [
+    {
+        id: "username",
+        type: "text",
+        name: "username",
+        required: true,
+        error: "please enter username",
+    },
+    {
+        id: "password",
+        type: "password",
+        name: "password",
+        required: true,
+        error: "please enter username",
+    },
+];
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [errorEmail, setErrorEmail] = useState(null);
+    const { setUser, setIsAllowed, LoginUserFetch, sec } =
+        useContext(LoginServiceContext);
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm();
 
-    function isValidEmail(email) {
-        return /\S+@\S+\.\S+/.test(email);
-    }
+    const [credentials, setCredentials] = useState(null);
 
-    const handleChange = (event) => {
-        const { value } = event.target;
-        const { name } = event.target.dataset;
-        if (name === "inputEmail" && !isValidEmail(value) && value) {
-            setErrorEmail("email is invalid");
-        } else if (name === "inputEmail" || !email) {
-            setErrorEmail(null);
-        }
-
-        switch (name) {
-            case "inputEmail":
-                setEmail(value);
-                break;
-            case "inputPassword":
-                setPassword(value);
+    const onSubmit = (data) => {
+        setCredentials(data);
+        setUser(data);
+        LoginUserFetch.mutate(data);
+        if (document.cookie) {
+            let access_token = document.cookie.match(
+                /(?<=access_token=)[\s\S]+(?=;*)/
+            )[0];
+            sec.mutate({ access_token });
         }
     };
 
     useEffect(() => {
-        console.log({ email, password });
+        if (sec.isSuccess) {
+            setIsAllowed(sec.data.data);
+        }
     });
 
     return (
         <div className="page page-login page-center">
             <Link to="/">
-                <img src="/LogoFinal.png" alt="pro3dskyLogo" className="logo" />
+                <img
+                    src="/LogoFinalCroped.png"
+                    alt="pro3dskyLogo"
+                    className="logo"
+                />
             </Link>
             <div className="wrapper-form">
-                <form>
-                    <h2>sign in</h2>
-                    <div className="wrapper-inputs">
-                        {LoginFormElements.map((element) => (
-                            <div key={element.id}>
-                                <input
-                                    id={element.id}
-                                    name={element.name}
-                                    data-name={element.name}
-                                    type={element.type}
-                                    className="form-control"
-                                    onBlur={handleChange}
-                                    placeholder=" "
-                                />
-                                <label htmlFor={element.name}>
-                                    {element.label}
-                                </label>
-                                {element.errorField && (
-                                    <div className="error">{errorEmail}</div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                    <div className="wrapper-submit-button">
-                        <button
-                            className="submit-button"
-                            disabled={errorEmail || !email}
-                        >
-                            sign in
-                        </button>
-                    </div>
-                </form>
+                <Form
+                    use={{ register, handleSubmit, errors, onSubmit }}
+                    fields={FormFields}
+                />
             </div>
+            {LoginUserFetch.isLoading && <span>Loading</span>}
+            {LoginUserFetch.isError && <span>Error</span>}
+            {LoginUserFetch.isSuccess && <span>success</span>}
+            {sec.isLoading && <span>sec Loading</span>}
+            {sec.isError && <span>sec Error</span>}
+            {sec.isSuccess && (
+                <span>{`sec success: ${JSON.stringify(sec.data.data)}`}</span>
+            )}
         </div>
     );
 };

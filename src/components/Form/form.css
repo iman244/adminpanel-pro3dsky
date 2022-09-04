@@ -41,7 +41,7 @@ form.apiForm input {
     border-radius: 4px;
     font-size: 16px;
     line-height: normal;
-    box-shadow: inset 1px 1px 3px #0000000d !important;
+    box-shadow: inset 1px 1px 3px #0000000d;
 }
 
 form.apiForm label {
@@ -83,6 +83,22 @@ form.apiForm span.error {
     font-size: 0.8rem;
     color: rgb(255, 125, 125);
     padding-left: 5px;
+}
+
+div.wrapper-input.isAdmin {
+    align-self: flex-start;
+    flex-direction: row-reverse;
+}
+
+div.wrapper-input.isAdmin input {
+    box-shadow: none;
+    min-width: auto;
+}
+
+div.wrapper-input.isAdmin label {
+    position: static;
+    transform: translateY(0) !important;
+    font-size: 0.9rem !important;
 }
 
 @media only screen and (max-width: 768px) {

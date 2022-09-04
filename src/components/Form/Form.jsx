@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Controller } from "react-hook-form";
 import Select from "react-select";
 import { selectOptionsDesign } from "./selectOptionsDesign";
+import "./form.css";
 
 const selectStyle = {
     option: (styles) => ({ ...styles, textTransform: "capitalize" }),
@@ -70,7 +71,14 @@ const Form = ({ use, fields }) => {
         <form className="apiForm" onSubmit={handleSubmit(onSubmit)}>
             {/* register your input into the hook by invoking the "register" function */}
             {fields.map((field) => (
-                <div className="wrapper-input" key={field.id}>
+                <div
+                    className={
+                        field.divClassName
+                            ? `wrapper-input ${field.divClassName}`
+                            : "wrapper-input"
+                    }
+                    key={field.id}
+                >
                     {input(field)}
                     {field.type !== "select" && (
                         <label htmlFor={field.name}>{field.name}</label>
