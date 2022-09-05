@@ -22,13 +22,16 @@ const DeleteDesign = () => {
     const onSubmit = (data) => console.log(data);
 
     return (
-        <>
-            <h2>delete design</h2>
+        <div className="fetch-container delete-design">
+            <div className="headers">
+                <h2>delete design</h2>
+            </div>
             <Form
                 use={{ register, handleSubmit, errors, onSubmit }}
+                submitButton="delete design"
                 fields={fields}
             />
-        </>
+        </div>
     );
 };
 

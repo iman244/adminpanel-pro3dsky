@@ -3,15 +3,10 @@ export const sidebarList = [
         id: 1,
         name: "users",
         to: "/users",
-        apiList: [
-            { id: 11, name: "create" },
-            { id: 12, name: "update" },
-            { id: 13, name: "delete" },
-        ],
     },
     {
         id: 2,
-        name: "upload design",
+        name: "design",
         to: "/newDesign",
         apiList: [
             { id: 21, name: "upload" },

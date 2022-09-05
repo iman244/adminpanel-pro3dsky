@@ -53,16 +53,19 @@ const CreateUser = () => {
     });
 
     return (
-        <>
-            <h2>create user</h2>
+        <div className="fetch-container create-user">
+            <div className="headers">
+                <h2>create user</h2>
+            </div>
             <Form
                 use={{ register, handleSubmit, errors, onSubmit }}
+                submitButton="create user"
                 fields={fields}
             />
             {createUserFetch.isLoading && <span>Loading</span>}
             {createUserFetch.isError && <span>Error</span>}
             {createUserFetch.isSuccess && <span>success</span>}
-        </>
+        </div>
     );
 };
 

@@ -1,6 +1,6 @@
 import "./b-login.css";
 import "./s-login.css";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Form from "../../components/Form/Form";
 import { useForm } from "react-hook-form";
@@ -32,10 +32,7 @@ const Login = () => {
         formState: { errors },
     } = useForm();
 
-    const [credentials, setCredentials] = useState(null);
-
     const onSubmit = (data) => {
-        setCredentials(data);
         setUser(data);
         LoginUserFetch.mutate(data);
         if (document.cookie) {

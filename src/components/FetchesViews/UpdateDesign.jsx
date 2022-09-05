@@ -22,13 +22,16 @@ const UpdateDesign = () => {
     const onSubmit = (data) => console.log(data);
 
     return (
-        <>
-            <h2>update design</h2>
+        <div className="fetch-container update-design">
+            <div className="headers">
+                <h2>update design</h2>
+            </div>
             <Form
                 use={{ register, handleSubmit, errors, onSubmit }}
+                submitButton="update"
                 fields={fields}
             />
-        </>
+        </div>
     );
 };
 

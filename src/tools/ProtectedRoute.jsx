@@ -1,9 +1,7 @@
-import React, { useContext, useEffect, useState } from "react";
-import { Navigate, Outlet } from "react-router-dom";
-import Page from "../components/page/Page";
+import React, { useContext, useEffect } from "react";
+import { Outlet } from "react-router-dom";
 import { LoginServiceContext } from "../context/LoginService";
 import Login from "../views/Login/Login";
-import Users from "../views/Users/Users";
 
 const ProtectedRoute = ({ redirectPath = "/login", children }) => {
     const { isAllowed } = useContext(LoginServiceContext);

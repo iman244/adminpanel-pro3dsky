@@ -24,38 +24,40 @@ const Sidebar = () => {
                                 <span className="sidebar">{item.name}</span>
                                 <i className="sidebar fa-solid fa-angle-right"></i>
                             </Link>
-                            <div
-                                className={
-                                    pathname.includes(item.to)
-                                        ? "apiList"
-                                        : "apiList close"
-                                }
-                            >
-                                <ul className="apiList">
-                                    {item.apiList.map((api) => {
-                                        return (
-                                            <li
-                                                key={api.id}
-                                                className="apiList"
-                                            >
-                                                <Link
-                                                    to={`${item.to}/${api.name}`}
-                                                    className={
-                                                        pathname ===
-                                                        `${item.to}/${api.name}`
-                                                            ? "apiList selected"
-                                                            : "apiList"
-                                                    }
+                            {item.apiList && (
+                                <div
+                                    className={
+                                        pathname.includes(item.to)
+                                            ? "apiList"
+                                            : "apiList close"
+                                    }
+                                >
+                                    <ul className="apiList">
+                                        {item.apiList.map((api) => {
+                                            return (
+                                                <li
+                                                    key={api.id}
+                                                    className="apiList"
                                                 >
-                                                    <span className="apiList">
-                                                        {api.name}
-                                                    </span>
-                                                </Link>
-                                            </li>
-                                        );
-                                    })}
-                                </ul>
-                            </div>
+                                                    <Link
+                                                        to={`${item.to}/${api.name}`}
+                                                        className={
+                                                            pathname ===
+                                                            `${item.to}/${api.name}`
+                                                                ? "apiList selected"
+                                                                : "apiList"
+                                                        }
+                                                    >
+                                                        <span className="apiList">
+                                                            {api.name}
+                                                        </span>
+                                                    </Link>
+                                                </li>
+                                            );
+                                        })}
+                                    </ul>
+                                </div>
+                            )}
                         </li>
                     );
                 })}

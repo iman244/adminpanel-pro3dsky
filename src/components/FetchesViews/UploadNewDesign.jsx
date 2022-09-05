@@ -38,13 +38,16 @@ const UploadNewDesign = () => {
     const onSubmit = (data) => console.log(data);
 
     return (
-        <>
-            <h2>upload design</h2>
+        <div className="fetch-container upload-design">
+            <div className="headers">
+                <h2>upload new design</h2>
+            </div>
             <Form
                 use={{ control, register, handleSubmit, errors, onSubmit }}
+                submitButton="upload"
                 fields={fields}
             />
-        </>
+        </div>
     );
 };
 

@@ -15,7 +15,7 @@ const selectStyle = {
     }),
 };
 
-const Form = ({ use, fields }) => {
+const Form = ({ use, submitButton, fields }) => {
     const { control, register, handleSubmit, errors, onSubmit } = use;
     const [selectedOption, setSelectedOption] = useState(null);
     const input = (field) => {
@@ -89,7 +89,7 @@ const Form = ({ use, fields }) => {
                 </div>
             ))}
             <div>
-                <input type="submit" className="submit" />
+                <input type="submit" value={submitButton} className="submit" />
             </div>
         </form>
     );

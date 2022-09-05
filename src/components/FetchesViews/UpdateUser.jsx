@@ -6,13 +6,28 @@ const fields = [
     {
         id: 1,
         type: "text",
-        name: "userId",
+        name: "username",
         required: true,
-        error: "please eneter user Id",
+        error: "please enter new username",
+    },
+    {
+        id: 2,
+        type: "password",
+        name: "password",
+        required: true,
+        error: "please enter new password",
+    },
+    {
+        id: 3,
+        type: "checkbox",
+        name: "isAdmin",
+        required: false,
+        error: "",
+        divClassName: "isAdmin",
     },
 ];
 
-const UpdateUser = () => {
+const UpdateUser = ({ username }) => {
     const {
         register,
         handleSubmit,
@@ -22,13 +37,17 @@ const UpdateUser = () => {
     const onSubmit = (data) => console.log(data);
 
     return (
-        <>
-            <h2>update user</h2>
+        <div className="fetch-container update-user">
+            <div className="headers">
+                <h2>update user</h2>
+                <span>{username}</span>
+            </div>
             <Form
                 use={{ register, handleSubmit, errors, onSubmit }}
+                submitButton="update user"
                 fields={fields}
             />
-        </>
+        </div>
     );
 };
 

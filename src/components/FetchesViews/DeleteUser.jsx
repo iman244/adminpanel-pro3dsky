@@ -6,13 +6,13 @@ const fields = [
     {
         id: 1,
         type: "text",
-        name: "userId",
+        name: "username",
         required: true,
-        error: "please eneter user Id",
+        error: "please enter username",
     },
 ];
 
-const DeleteUser = () => {
+const DeleteUser = ({ username }) => {
     const {
         register,
         handleSubmit,
@@ -22,13 +22,17 @@ const DeleteUser = () => {
     const onSubmit = (data) => console.log(data);
 
     return (
-        <>
-            <h2>delete user</h2>
+        <div className="fetch-container delete-user">
+            <div className="headers">
+                <h2>delete user</h2>
+                <span>{username}</span>
+            </div>
             <Form
                 use={{ register, handleSubmit, errors, onSubmit }}
+                submitButton="delete user"
                 fields={fields}
             />
-        </>
+        </div>
     );
 };
 

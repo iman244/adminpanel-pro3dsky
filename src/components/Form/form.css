@@ -101,6 +101,22 @@ div.wrapper-input.isAdmin label {
     font-size: 0.9rem !important;
 }
 
+div.fetch-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+div.headers {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+div.delete-user input[type="submit"] {
+    background-color: rgb(255, 68, 68);
+}
+
 @media only screen and (max-width: 768px) {
     form.apiForm input {
         width: 60vw;

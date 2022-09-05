@@ -1,6 +1,24 @@
+div.users-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
 div.users-grid {
     display: grid;
     gap: 30px;
+}
+
+button.create-user {
+    text-transform: capitalize;
+    border-radius: 5px;
+    padding: 5px 10px;
+    color: #fff;
+    background-color: #4182aa;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
 }
 
 @media only screen and (max-width: 576px) {
@@ -17,6 +35,6 @@ div.users-grid {
 
 @media only screen and (min-width: 992px) {
     div.users-grid {
-        grid-template-columns: 20vw 20vw 20vw 20vw;
+        grid-template-columns: 15vw 15vw 15vw 15vw;
     }
 }
