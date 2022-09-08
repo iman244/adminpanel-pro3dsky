@@ -1,18 +1,17 @@
 import axios from "axios";
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useEffect } from "react";
 import { useMutation } from "react-query";
 
 export const LoginServiceContext = createContext();
+
 const LoginService = ({ children }) => {
-    const [user, setUser] = useState(null);
-    const [isAllowed, setIsAllowed] = useState(null);
     const LoginUserFetch = useMutation((data) => {
-        return axios.post("http://127.0.0.1:3000/auth/login", data, {
+        return axios.post("http://192.168.31.183:3000/auth/login", data, {
             withCredentials: true,
         });
     });
     const sec = useMutation((data) => {
-        return axios.post("http://127.0.0.1:3000/", data, {
+        return axios.post("http://192.168.31.183:3000/", data, {
             withCredentials: true,
         });
     });
@@ -27,18 +26,11 @@ const LoginService = ({ children }) => {
             }
         };
         protect();
-        if (sec.isSuccess) {
-            setIsAllowed(sec.data.data);
-        }
     }, [document.cookie]);
 
     return (
         <LoginServiceContext.Provider
             value={{
-                user,
-                setUser,
-                isAllowed,
-                setIsAllowed,
                 LoginUserFetch,
                 sec,
             }}

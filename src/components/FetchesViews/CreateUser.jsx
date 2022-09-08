@@ -41,16 +41,13 @@ const CreateUser = () => {
             withCredentials: true,
         });
     });
-    const [credentials, setCredentials] = useState(null);
 
     const onSubmit = (data) => {
-        setCredentials(data);
+        console.log(data);
         createUserFetch.mutate(data);
     };
 
-    useEffect(() => {
-        console.log("front state: ", credentials);
-    });
+    useEffect(() => {});
 
     return (
         <div className="fetch-container create-user">

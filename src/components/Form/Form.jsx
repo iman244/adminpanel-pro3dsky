@@ -15,7 +15,7 @@ const selectStyle = {
     }),
 };
 
-const Form = ({ use, submitButton, fields }) => {
+const Form = ({ use, submitButton, fields, pattern }) => {
     const { control, register, handleSubmit, errors, onSubmit } = use;
     const [selectedOption, setSelectedOption] = useState(null);
     const input = (field) => {
@@ -27,6 +27,7 @@ const Form = ({ use, submitButton, fields }) => {
                         name={field.name}
                         {...register(field.name, {
                             required: field.required,
+                            pattern: field.pattern ? pattern : /[\s\S]*/,
                         })}
                         placeholder=" "
                     />

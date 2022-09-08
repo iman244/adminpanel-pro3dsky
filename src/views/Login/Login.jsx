@@ -24,8 +24,8 @@ const FormFields = [
 ];
 
 const Login = () => {
-    const { setUser, setIsAllowed, LoginUserFetch, sec } =
-        useContext(LoginServiceContext);
+    const { LoginUserFetch, sec } = useContext(LoginServiceContext);
+
     const {
         register,
         handleSubmit,
@@ -33,7 +33,6 @@ const Login = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        setUser(data);
         LoginUserFetch.mutate(data);
         if (document.cookie) {
             let access_token = document.cookie.match(
@@ -43,11 +42,7 @@ const Login = () => {
         }
     };
 
-    useEffect(() => {
-        if (sec.isSuccess) {
-            setIsAllowed(sec.data.data);
-        }
-    });
+    useEffect(() => {});
 
     return (
         <div className="page page-login page-center">
@@ -62,10 +57,13 @@ const Login = () => {
                 <Form
                     use={{ register, handleSubmit, errors, onSubmit }}
                     fields={FormFields}
+                    submitButton="login"
                 />
             </div>
             {LoginUserFetch.isLoading && <span>Loading</span>}
-            {LoginUserFetch.isError && <span>Error</span>}
+            {LoginUserFetch.isError && (
+                <span>{LoginUserFetch.error.response.data.message}</span>
+            )}
             {LoginUserFetch.isSuccess && <span>success</span>}
             {sec.isLoading && <span>sec Loading</span>}
             {sec.isError && <span>sec Error</span>}

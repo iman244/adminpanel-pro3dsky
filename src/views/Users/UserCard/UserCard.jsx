@@ -25,7 +25,7 @@ const UserCard = ({ user }) => {
                     </span>
                 </div>
                 <div className="credential-wrapper">
-                    <span className="label">isAmin:</span>
+                    <span className="label">isAdmin:</span>
                     <span className="credential" title={`${isAdmin}`}>
                         {isAdmin ? (
                             <i
@@ -55,12 +55,12 @@ const UserCard = ({ user }) => {
             <Modal
                 modalOpen={modalOpenUpdate}
                 setModalOpen={setModalOpenUpdate}
-                content={<UpdateUser username={username} />}
+                content={<UpdateUser user={user} />}
             />
             <Modal
                 modalOpen={modalOpenDelete}
                 setModalOpen={setModalOpenDelete}
-                content={<DeleteUser username={username} />}
+                content={<DeleteUser user={user} />}
             />
         </>
     );

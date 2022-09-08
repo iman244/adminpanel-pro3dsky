@@ -1,8 +1,6 @@
-import { useContext, useEffect, useState } from "react";
 import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./tools/ProtectedRoute";
-import Login from "./views/Login/Login";
 import Page from "./components/page/Page";
 import CreateUser from "./components/FetchesViews/CreateUser";
 import UpdateUser from "./components/FetchesViews/UpdateUser";
@@ -13,6 +11,18 @@ import DeleteDesign from "./components/FetchesViews/DeleteDesign";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Users from "./views/Users/Users";
 import LoginService from "./context/LoginService";
+import UsersService from "./views/Users/UsersService";
+
+/*
+
+error when credential is wrong
+skeleton
+form for upload images
+sidebar need to added in mobile devices
+buttons react-hook-form are not responsive
+signOut
+
+*/
 
 const queryClient = new QueryClient();
 
@@ -22,15 +32,22 @@ function App() {
             <LoginService>
                 <BrowserRouter>
                     <Routes>
-                        <Route path="/login" element={<Login />} />
                         <Route element={<ProtectedRoute />}>
                             <Route
-                                path="/"
+                                path="/login"
                                 element={<Page content={<span>home</span>} />}
                             />
                             <Route
                                 path="/users"
-                                element={<Page content={<Users />} />}
+                                element={
+                                    <Page
+                                        content={
+                                            <UsersService>
+                                                <Users />
+                                            </UsersService>
+                                        }
+                                    />
+                                }
                             />
                             <Route
                                 path="/users/create"
@@ -61,6 +78,11 @@ function App() {
                             <Route
                                 path="/newDesign/delete"
                                 element={<Page content={<DeleteDesign />} />}
+                            />
+
+                            <Route
+                                path="*"
+                                element={<Page content={<span>home</span>} />}
                             />
                         </Route>
                     </Routes>
