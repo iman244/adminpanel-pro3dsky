@@ -18,16 +18,21 @@ const Users = () => {
         setPage,
         itemsPerPage,
         usersCount,
+        page,
+        keyword,
+        setKeyword
     } = useContext(UsersContext);
 
-    useEffect(() => {});
+    useEffect(() => {
+        console.log("data", data)
+    });
 
     return (
         <div className="users-container">
             <div className="top">
                 <div className="headers">
                     <h2>users list</h2>
-                    <Search />
+                    <Search searchName="search users" keyword={keyword} setKeyword={setKeyword} />
                     <button
                         className="create-user"
                         onClick={() => setModalOpenCreate(true)}

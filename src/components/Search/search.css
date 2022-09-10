@@ -11,6 +11,10 @@ input.searchBar {
     border-radius: 24px;
 }
 
+input::placeholder {
+    text-transform: capitalize;
+}
+
 button.searchBar {
     position: absolute;
     top: 0;

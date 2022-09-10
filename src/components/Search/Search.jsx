@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import "./search.css";
 import SearchSVG from "./svg/SearchSVG";
 
-const Search = ({ searchName }) => {
-    const [searchWord, setSearchWord] = useState("");
+const Search = ({ searchName, keyword, setKeyword }) => {
+
 
     useEffect(() => {
-        console.log(searchWord);
-    });
+console.log(keyword)
+
+
+    },[]);
 
     return (
         <div className="searchBar">
             <input
                 className="searchBar"
-                placeholder="Search Users"
-                value={searchWord}
-                onChange={(event) => setSearchWord(event.target.value)}
+                placeholder={searchName}
+                value={keyword}
+                onChange={(event) => setKeyword(event.target.value)}
             />
             <button className="searchBar" onClick={() => console.log("search")}>
                 <div className="searchSVG">

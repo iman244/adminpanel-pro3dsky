@@ -6,12 +6,12 @@ export const LoginServiceContext = createContext();
 
 const LoginService = ({ children }) => {
     const LoginUserFetch = useMutation((data) => {
-        return axios.post("http://192.168.31.183:3000/auth/login", data, {
+        return axios.post("http://127.0.0.1:3000/auth/login", data, {
             withCredentials: true,
         });
     });
     const sec = useMutation((data) => {
-        return axios.post("http://192.168.31.183:3000/", data, {
+        return axios.post("http://127.0.0.1:3000/", data, {
             withCredentials: true,
         });
     });
