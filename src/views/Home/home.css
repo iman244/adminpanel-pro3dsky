@@ -1,0 +1,27 @@
+div.landing {
+  width: 100%;
+  height: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 40px;
+}
+
+a.landing {
+  padding: 20px 40px;
+  border: 1px solid #696969;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.1s ease-in;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+
+a.landing:hover {
+  background-color: #696969;
+  color: white;
+}

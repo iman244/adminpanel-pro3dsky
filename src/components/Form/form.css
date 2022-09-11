@@ -59,8 +59,10 @@ form.apiForm input:focus + label {
 form.apiForm input.submit {
     box-sizing: border-box;
     padding: 12px 40px !important;
-    max-width: 40px;
+    width: fit-content;
+    
 }
+
 
 form.apiForm input.submit {
     text-transform: capitalize;
@@ -88,11 +90,13 @@ form.apiForm span.error {
 div.wrapper-input.isAdmin {
     align-self: flex-start;
     flex-direction: row-reverse;
+    align-items: center;
 }
 
 div.wrapper-input.isAdmin input {
     box-shadow: none;
-    min-width: auto;
+    width: 40px !important;
+    height: 20px !important;
 }
 
 div.wrapper-input.isAdmin label {
@@ -105,12 +109,6 @@ div.fetch-container {
     display: flex;
     flex-direction: column;
     gap: 20px;
-}
-
-div.headers {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 div.delete-user input[type="submit"] {
@@ -128,7 +126,7 @@ div.delete-user input[type="submit"] {
         padding: 48px 60px 56px;
     }
 
-    form.apiForm input {
+    form.apiForm input:not([type="submit"]):not([type="checkbox"]) {
         box-sizing: border-box;
         min-width: 400px;
     }

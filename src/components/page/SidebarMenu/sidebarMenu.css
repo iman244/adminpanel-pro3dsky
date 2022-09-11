@@ -1,0 +1,37 @@
+div.sidebarMenu {
+  align-self: flex-start;
+  position: fixed;
+  transition: 0.5s;
+  overflow-x: hidden;
+  height: 100vh;
+  z-index: 2000;
+  background-color: var(--sidebarBackgroundColor);
+  display: flex;
+  flex-direction: column;
+}
+
+div.sidebarMenu > div.content {
+  height: 80vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+div.sidebarMenu > div.content > * {
+  font-size: large;
+  width: 30vw;
+  text-transform: capitalize;
+  padding: 20px 20px;
+  border: 1px solid #696969;
+  border-radius: 5px;
+  transition: 0.1s ease-in;
+  text-align: center;
+}
+
+div.sidebarMenu > div.content > *:hover {
+  background-color: #696969;
+  color: white;
+  cursor: pointer;
+}

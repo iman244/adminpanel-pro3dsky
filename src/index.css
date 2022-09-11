@@ -5,44 +5,46 @@
 } */
 
 :root {
-    --navLogo-color: #696969;
-    --navPadding: 15px;
+  --navLogo-color: #696969;
+  --navPadding: 15px;
 
-    --page-content: 90vh;
+  --page-content: 90vh;
 
-    --basic: #4182aa;
-    --basicHover: #145278;
+  --basic: #4182aa;
+  --basicHover: #145278;
 
-    --card-desc-fontColor: #aaa;
-    --cardDownload: #f7f7f7;
-    --card-smallScreen-width: 80vw;
-    --card-mediumScreen-width: calc((100vw - 165px - 4 * 30px - 1vw) / 2);
-    --card-largeScreen-width: calc((100vw - 165px - 4 * 30px - 1vw) / 4);
+  --sidebarBackgroundColor: #fafafa;
+
+  --card-desc-fontColor: #aaa;
+  --cardDownload: #f7f7f7;
+  --card-smallScreen-width: 80vw;
+  --card-mediumScreen-width: calc((100vw - 165px - 4 * 30px - 1vw) / 2);
+  --card-largeScreen-width: calc((100vw - 165px - 4 * 30px - 1vw) / 4);
 }
 
 body {
-    font-family: "Roboto", sans-serif;
-    font-size: 15px;
-    color: #4f4f4f;
-    cursor: default;
+  font-family: "Roboto", sans-serif;
+  font-size: 15px;
+  color: #4f4f4f;
+  cursor: default;
 }
 
 html,
 body,
 #root,
 .page {
-    box-sizing: border-box;
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow: auto;
+  box-sizing: border-box;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: auto;
 }
 
 #root {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 h1,
@@ -51,29 +53,29 @@ h3,
 h4,
 h5,
 h6 {
-    text-transform: capitalize;
-    margin: 0;
+  text-transform: capitalize;
+  margin: 0;
 }
 
 input,
 div {
-    outline: 0;
+  outline: 0;
 }
 
 label {
-    cursor: default;
+  cursor: default;
 }
 label {
-    display: inline-block;
+  display: inline-block;
 }
 
 button,
 ul,
 li,
 a {
-    all: unset;
+  all: unset;
 }
 
 div.hr {
-    border-top: 1px solid rgba(0, 0, 0, 0.15);
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
 }

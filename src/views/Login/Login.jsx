@@ -7,71 +7,66 @@ import { useForm } from "react-hook-form";
 import { LoginServiceContext } from "../../context/LoginService";
 
 const FormFields = [
-    {
-        id: "username",
-        type: "text",
-        name: "username",
-        required: true,
-        error: "please enter username",
-    },
-    {
-        id: "password",
-        type: "password",
-        name: "password",
-        required: true,
-        error: "please enter username",
-    },
+  {
+    id: "username",
+    type: "text",
+    name: "username",
+    required: true,
+    error: "please enter username",
+  },
+  {
+    id: "password",
+    type: "password",
+    name: "password",
+    required: true,
+    error: "please enter username",
+  },
 ];
 
 const Login = () => {
-    const { LoginUserFetch, sec } = useContext(LoginServiceContext);
+  const { LoginUserFetch, sec } = useContext(LoginServiceContext);
 
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
-    const onSubmit = (data) => {
-        LoginUserFetch.mutate(data);
-        if (document.cookie) {
-            let access_token = document.cookie.match(
-                /(?<=access_token=)[\s\S]+(?=;*)/
-            )[0];
-            sec.mutate({ access_token });
-        }
-    };
+  const onSubmit = (data) => {
+    LoginUserFetch.mutate(data);
+    if (document.cookie) {
+      let access_token = document.cookie.match(
+        /(?<=access_token=)[\s\S]+(?=;*)/
+      )[0];
+      sec.mutate({ access_token });
+    }
+  };
 
-    useEffect(() => {});
+  useEffect(() => {});
 
-    return (
-        <div className="page page-login page-center">
-            <Link to="/">
-                <img
-                    src="/LogoFinalCroped.png"
-                    alt="pro3dskyLogo"
-                    className="logo"
-                />
-            </Link>
-            <div className="wrapper-form">
-                <Form
-                    use={{ register, handleSubmit, errors, onSubmit }}
-                    fields={FormFields}
-                    submitButton="login"
-                />
-            </div>
-            {LoginUserFetch.isLoading && <span>Loading</span>}
-            {LoginUserFetch.isError && (
-                <span>{LoginUserFetch.error.response.data.message}</span>
-            )}
-            {LoginUserFetch.isSuccess && <span>success</span>}
-            {sec.isLoading && <span>sec Loading</span>}
-            {sec.isError && <span>sec Error</span>}
-            {sec.isSuccess && (
-                <span>{`sec success: ${JSON.stringify(sec.data.data)}`}</span>
-            )}
+  return (
+    <div className="page page-login page-center">
+      <Link to="/">
+        <img src="/LogoFinalCroped.png" alt="pro3dskyLogo" className="logo" />
+      </Link>
+      <div className="wrapper-form">
+        <div className="loginError">
+          {LoginUserFetch.isError ? (
+            <span>you are not authorized</span>
+          ) : (
+            sec.isSuccess &&
+            sec.data.data === false && <span>you are not authorized</span>
+          )}
         </div>
-    );
+        <Form
+          use={{ register, handleSubmit, errors, onSubmit }}
+          fields={FormFields}
+          isLoading={LoginUserFetch.isLoading || sec.isLoading}
+          submitButton="login"
+        />
+      </div>
+    </div>
+  );
 };
 
 export default Login;

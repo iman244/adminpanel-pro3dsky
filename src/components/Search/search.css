@@ -26,16 +26,14 @@ div.searchSVG {
     cursor: pointer;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 567px) {
     input.searchBar {
-        width: 65vw;
+        width: 60vw;
     }
 }
 
-@media only screen and (min-width: 768px) {
+@media only screen and (min-width: 567px) {
     input.searchBar {
-        min-width: 450px;
-        max-width: 600px;
-        width: 50vw;
+        width: fit-content;
     }
 }

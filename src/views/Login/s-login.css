@@ -1,49 +1,50 @@
 .page-login > .logo {
-    padding: 0 5%;
+  padding: 0 5%;
 }
 
 .page-login input {
-    box-sizing: border-box;
-    padding: 24px 10px 5px;
+  box-sizing: border-box;
+  padding: 24px 10px 5px;
 }
 
 .page-login label {
-    width: 100%;
-    padding: 12.5px;
-    box-sizing: border-box;
+  width: 100%;
+  padding: 12.5px;
+  box-sizing: border-box;
 }
 
 .page-login input:not(:placeholder-shown) + label,
 .page-login input:focus + label {
-    font-size: 0.7rem;
-    transform: translateY(-11px);
+  font-size: 0.7rem;
+  transform: translateY(-11px);
 }
 
 .page-login .submit-button {
-    padding: 12px 40px;
+  padding: 12px 40px;
 }
 
 @media only screen and (max-width: 768px) {
-    .page-center {
-        gap: 20px;
-    }
+  .page-center {
+    gap: 20px;
+  }
 
-    .page-login input {
-        width: 60vw;
-    }
+  .page-login input {
+    width: 60vw;
+  }
 }
 
 @media only screen and (min-width: 768px) {
-    .page-center {
-        gap: 100px;
-    }
+  .page-center {
+    gap: 30px;
+    justify-content: center;
+  }
 
-    .page-login form {
-        padding: 48px 60px 56px;
-    }
+  .page-login form {
+    padding: 48px 60px 40px;
+  }
 
-    .page-login input {
-        box-sizing: border-box;
-        min-width: 400px;
-    }
+  .page-login input:not([type="submit"]) {
+    box-sizing: border-box;
+    min-width: 400px;
+  }
 }
