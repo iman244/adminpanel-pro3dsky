@@ -32,7 +32,10 @@ const Page = ({ content }) => {
       let access_token = document.cookie.match(
         /(?<=access_token=)[\s\S]+(?=;*)/
       )[0];
-      console.log(access_token);
+      if (!access_token) {
+        alert("Your session is expired! please login again");
+        window.location.reload();
+      }
     } else {
       alert("Your session is expired! please login again");
       window.location.reload();

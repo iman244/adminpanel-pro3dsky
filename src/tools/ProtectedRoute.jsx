@@ -6,66 +6,38 @@ import "./reactLoadingCss.css";
 import Login from "../views/Login/Login";
 
 const ProtectedRoute = ({ children }) => {
-    const { sec } = useContext(LoginServiceContext);
+  const { sec } = useContext(LoginServiceContext);
 
-    useEffect(() => {});
+  useEffect(() => {});
 
-    return (
-        <>
-            {document.cookie ? (
-                sec.data ? (
-                    sec.data.data ? (
-                        children ? (
-                            children
-                        ) : (
-                            <Outlet />
-                        )
-                    ) : (
-                        <Login />
-                    )
-                ) : (
-                    <div className="loading">
-                        <ReactLoading
-                            type={"bars"}
-                            color={"gray"}
-                            height={"30%"}
-                            width={"30%"}
-                        />
-                    </div>
-                )
+  return (
+    <>
+      {document.cookie ? (
+        sec.data ? (
+          sec.data.data ? (
+            children ? (
+              children
             ) : (
-                <Login />
-            )}
-
-            {/* {sec.isIdle ? (
-                <>
-                    {console.log(1)}
-                    <Login />
-                </>
-            ) : !sec.isSuccess ? (
-                <div className="loading">
-                    {console.log(2)}
-                    <ReactLoading
-                        type={"bars"}
-                        color={"gray"}
-                        height={"100%"}
-                        width={"100%"}
-                    />
-                </div>
-            ) : sec.data.data ? (
-                children ? (
-                    children
-                ) : (
-                    <Outlet />
-                )
-            ) : (
-                <>
-                    {console.log(4)}
-                    <Login />
-                </>
-            )} */}
-        </>
-    );
+              <Outlet />
+            )
+          ) : (
+            <Login />
+          )
+        ) : (
+          <div className="loading">
+            <ReactLoading
+              type={"bars"}
+              color={"gray"}
+              height={"30%"}
+              width={"30%"}
+            />
+          </div>
+        )
+      ) : (
+        <Login />
+      )}
+    </>
+  );
 };
 
 export default ProtectedRoute;
