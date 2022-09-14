@@ -1,0 +1,93 @@
+div.product.page {
+  display: flex;
+  justify-content: center;
+
+  /* padding-top: 5vh; */
+}
+
+div.product.container {
+  margin-top: 20px;
+  padding: 20px;
+
+  height: fit-content;
+  -webkit-box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.3);
+  box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  background-color: rgb(251, 251, 251);
+}
+
+div.product.page div.imagePdescDownload {
+  display: flex;
+  gap: 20px;
+}
+
+div.product.page div.image {
+  border-radius: 10px;
+  overflow: hidden;
+  width: 300px;
+}
+
+div.product.page .image-index {
+  box-sizing: border-box;
+  overflow: hidden;
+  object-fit: contain;
+  width: 100%;
+}
+
+div.product.page div.descAndDownload {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  width: fit-content;
+  max-width: 250px;
+}
+
+div.desc {
+  display: flex;
+  flex-direction: column;
+}
+
+div.product.page span.desc {
+  text-transform: capitalize;
+  color: #999;
+}
+
+div.product.page div.listOfImages {
+  overflow-x: auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: nowrap;
+  gap: 15px;
+}
+
+@media only screen and (min-width: 768px) {
+  div.product.page div.imagePdescDownload {
+    flex-direction: row;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  div.product.page div.imagePdescDownload {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  div.product.page div.image {
+    box-sizing: border-box;
+    width: 100%;
+  }
+
+  div.product.container {
+    max-width: 80vw;
+  }
+}
+
+div.container.main > form {
+  box-sizing: border-box;
+  height: 100%;
+}

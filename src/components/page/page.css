@@ -14,7 +14,7 @@ nav {
   box-sizing: border-box;
   height: var(--page-content);
   margin-top: 10vh;
-  padding: 2vh 0;
+  /* padding: 2vh 0; */
 }
 
 nav a {
@@ -106,8 +106,8 @@ i.menu:hover {
 }
 
 div.container.main {
-  padding-right: 10px;
-  padding-left: 10px;
+  /* padding-right: 10px;
+  padding-left: 10px; */
 }
 
 @media only screen and (max-width: 768px) {
@@ -152,7 +152,7 @@ div.container.main {
   }
 }
 
-@media only screen and (max-width: 576px) {
+@media only screen and (max-width: 768px) {
   div.container.sidebar {
     display: none;
   }
@@ -173,19 +173,19 @@ div.page.home {
 }
 
 div.sidebar.container {
+  box-sizing: border-box;
   min-width: 150px;
-  width: 10vw;
   padding-left: var(--navPadding);
 }
 
 div.page > div.container {
-  padding-top: 2vh;
+  /* padding-top: 2vh; */
 }
 
 div.main.container {
   flex: 1;
-  display: flex;
+  /* display: flex;
   align-items: center;
   flex-direction: column;
-  gap: 20px;
+  gap: 20px; */
 }

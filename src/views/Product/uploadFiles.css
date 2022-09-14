@@ -1,0 +1,94 @@
+div.uploadFiles {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+div.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+}
+
+div.handlerUploadFiles {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 50px;
+  background-color: rgb(230, 230, 230);
+}
+
+div.handlerUploadFiles button {
+  padding: 5px;
+  color: white;
+  background-color: #4182aa;
+  cursor: pointer;
+  height: 100%;
+}
+
+div.uploadedFiles {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  background-color: rgb(230, 230, 230);
+}
+
+div.uploadedFiles ul {
+  display: flex;
+  flex-direction: column;
+}
+
+div.uploadedFiles ul li {
+  display: flex;
+  justify-content: space-between;
+}
+
+div.uploadedFiles ul li :last-child {
+  color: black;
+  cursor: pointer;
+}
+
+div.uploadedFiles li.clear-all {
+  margin-top: 20px;
+}
+
+div.uploadedFiles li.clear-all button {
+  text-transform: capitalize;
+  color: #fff !important;
+  background-color: gray;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: small;
+  line-height: normal;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 6px 20px !important;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+div.submit {
+  text-align: center;
+  margin-top: 15px;
+}
+
+div.submit button {
+  text-transform: capitalize;
+  color: #fff !important;
+  background-color: #4182aa;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: small;
+  line-height: normal;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 6px 20px !important;
+  width: -moz-fit-content;
+  width: fit-content;
+}

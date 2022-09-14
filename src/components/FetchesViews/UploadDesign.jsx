@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useSnackbar } from "notistack";
 import React from "react";
 import { useEffect } from "react";
@@ -28,6 +27,7 @@ const fields = [
     required: false,
     error: "",
     divClassName: "isAdmin",
+    defaultValue: true,
   },
   {
     id: 4,

@@ -1,0 +1,28 @@
+button.basic-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+
+  border: 2px solid var(--basic);
+  border-radius: 8px;
+
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
+
+  transition: background-color 0.1s ease-out;
+}
+
+span.basic-btn {
+  text-transform: capitalize;
+  font-size: small;
+  font-weight: 500;
+}
+
+button.basic-btn:hover {
+}
+
+button.basic-btn:hover span.basic-btn,
+button.basic-btn:hover i.basic-btn {
+  color: white;
+}

@@ -49,7 +49,6 @@ const UpdateUser = ({ user, setModal }) => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
     UpdateUserFetch.mutate(data);
   };
 
@@ -59,7 +58,7 @@ const UpdateUser = ({ user, setModal }) => {
     setValue("isAdmin", user.isAdmin);
     UpdateUserFetch.isSuccess && setModal(false);
     UpdateUserFetch.isSuccess && window.location.reload();
-  });
+  }, []);
 
   return (
     <div className="fetch-container update-user">

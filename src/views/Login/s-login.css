@@ -26,6 +26,7 @@
 @media only screen and (max-width: 768px) {
   .page-center {
     gap: 20px;
+    justify-content: center;
   }
 
   .page-login input {

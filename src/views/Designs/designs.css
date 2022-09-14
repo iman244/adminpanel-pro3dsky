@@ -1,0 +1,51 @@
+div.content.design {
+  display: flex;
+  flex-direction: column;
+  gap: 3vw;
+  box-sizing: border-box;
+  height: 100%;
+  justify-content: space-between;
+}
+
+div.wrapper.cardList {
+  display: flex;
+  justify-content: center;
+  overflow: auto;
+  padding: 5px;
+}
+
+div.grid-container {
+  width: fit-content;
+  display: grid;
+  gap: 30px;
+}
+
+div.card {
+  box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+}
+
+@media only screen and (max-width: 576px) {
+  div.grid-container {
+    grid-template-columns: var(--card-smallScreen-width);
+  }
+}
+
+@media only screen and (min-width: 576px) {
+  div.grid-container {
+    grid-template-columns: var(--card-mediumScreen-width) var(
+        --card-mediumScreen-width
+      );
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  div.grid-container {
+    grid-template-columns:
+      var(--card-largeScreen-width) var(--card-largeScreen-width) var(
+        --card-largeScreen-width
+      )
+      var(--card-largeScreen-width);
+  }
+}

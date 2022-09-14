@@ -1,0 +1,71 @@
+div.content.main div.bottom {
+  display: flex;
+  justify-content: center;
+}
+
+ul.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #4182aa;
+  text-transform: capitalize;
+  font-weight: 500;
+  margin-bottom: 1vh;
+  gap: 10px;
+}
+
+li.page,
+li.break {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: fit-content;
+  height: fit-content;
+}
+
+li.next,
+li.previouse {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+a.nextlink,
+a.previouselink,
+a.breaklink {
+  padding: 5px 10px;
+  border-radius: 3px;
+}
+
+a.pagelink,
+a.breaklink {
+  padding: 5px 10px;
+  border: 1px solid #4182aa;
+  border-radius: 3px;
+}
+
+a.nextlink:hover,
+a.previouselink:hover {
+  color: #145278;
+  cursor: pointer;
+}
+
+li.active a {
+  color: gray;
+  background-color: rgba(128, 128, 128, 0.2);
+  border-color: gray;
+  font-weight: 600;
+}
+
+li.active a:hover {
+  background-color: white !important;
+  border-color: black !important;
+  color: black !important;
+}
+
+ul.container > li:hover > a.pagelink {
+  background-color: #4182aa;
+  border-color: #4182aa;
+  color: white;
+  cursor: pointer;
+}

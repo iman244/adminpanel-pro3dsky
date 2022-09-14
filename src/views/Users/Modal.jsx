@@ -1,33 +1,40 @@
 import React from "react";
 import ReactModal from "react-modal";
 
-const modalStyle = {
+const Modal = ({
+  modalOpen,
+  setModalOpen,
+  content,
+  overlayStyle,
+  contentStyle,
+}) => {
+  const modalStyle = {
     overlay: {
-        zIndex: "1000",
-        backgroundColor: "rgba(0,0,0,0.4)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+      ...overlayStyle,
+      zIndex: "1000",
+      backgroundColor: "rgba(0,0,0,0.4)",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
     },
     content: {
-        position: "static",
-        border: "none",
-        width: "fit-content",
-        height: "fit-content",
+      ...contentStyle,
+      position: "static",
+      border: "none",
+      width: "fit-content",
+      height: "fit-content",
     },
-};
-
-const Modal = ({ modalOpen, setModalOpen, content }) => {
-    return (
-        <ReactModal
-            style={modalStyle}
-            isOpen={modalOpen}
-            shouldCloseOnOverlayClick={true}
-            onRequestClose={() => setModalOpen(false)}
-        >
-            {content}
-        </ReactModal>
-    );
+  };
+  return (
+    <ReactModal
+      style={modalStyle}
+      isOpen={modalOpen}
+      shouldCloseOnOverlayClick={true}
+      onRequestClose={() => setModalOpen(false)}
+    >
+      {content}
+    </ReactModal>
+  );
 };
 
 export default Modal;

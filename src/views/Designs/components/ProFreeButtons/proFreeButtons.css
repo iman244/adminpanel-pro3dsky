@@ -1,0 +1,35 @@
+div.content.design div.buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1vw;
+  gap: 1rem;
+}
+
+div.content.design div.proFreeButtons {
+  display: flex;
+  gap: 1rem;
+}
+
+div.content.design button.proFreeButtons {
+  border-color: #d0d0d0;
+  cursor: pointer;
+  color: #5e5e5e;
+  line-height: 1;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: center;
+  text-transform: uppercase;
+  padding: 0.8rem 1.8rem;
+  background-color: white;
+}
+
+div.content.design button.proFreeButtons:hover,
+div.content.design button.proFreeButtons.selected {
+  border-color: #98c2dc;
+  color: #4182aa;
+  background-color: #efeff0;
+}
