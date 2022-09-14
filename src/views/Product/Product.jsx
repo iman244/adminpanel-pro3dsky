@@ -11,6 +11,9 @@ import Select from "react-select";
 import { selectOptionsDesign } from "../../components/Form/selectOptionsDesign";
 import ReactLoading from "react-loading";
 import { useSnackbar } from "notistack";
+import PageNotFound from "../404/PageNotFound";
+import Modal from "../Users/Modal";
+import DeleteDesign from "../../components/FetchesViews/DeleteDesign";
 
 const fields = [
   {
@@ -39,6 +42,7 @@ const fields = [
     id: 4,
     type: "file",
     name: "images",
+    accept: "image/png, image/jpeg",
     required: false,
     error: "please upload your design",
     multiple: true,
@@ -75,8 +79,18 @@ function findIinSelectOptionsDesign(data) {
 
 const Product = () => {
   let params = useParams();
-
+  const [modalOpenDelete, setModalOpenDelete] = useState(false);
   const [i, setI] = useState();
+
+  const {
+    control,
+    register,
+    handleSubmit,
+    watch,
+    reset,
+    setValue,
+    formState: { errors },
+  } = useForm();
 
   const design = useQuery(["design", i], () => getDesign(params.id), {
     onSuccess: (data) => {
@@ -138,16 +152,6 @@ const Product = () => {
     setIsViewerOpen(false);
   };
 
-  const {
-    control,
-    register,
-    handleSubmit,
-    watch,
-    reset,
-    setValue,
-    formState: { errors },
-  } = useForm();
-
   const onSubmit = (data) => {
     if (!data.category) {
       data.category =
@@ -191,6 +195,7 @@ const Product = () => {
             {...register(field.name, {
               required: field.required,
             })}
+            accept={field.accept}
             placeholder=" "
             multiple={field.multiple}
           />
@@ -233,6 +238,8 @@ const Product = () => {
         </div>
       ) : isError ? (
         <div>Error: {error.message}</div>
+      ) : data.statusCode === 400 || data.statusCode === 404 ? (
+        <PageNotFound />
       ) : (
         <>
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -270,11 +277,13 @@ const Product = () => {
 
                     <div className="submit">
                       <input type="submit" value="update" className="submit" />
-                      <input
-                        type="submit"
-                        value="delete"
-                        className="submit delete"
-                      />
+                      <button
+                        type="button"
+                        className="delete"
+                        onClick={() => setModalOpenDelete(true)}
+                      >
+                        delete
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -308,6 +317,13 @@ const Product = () => {
               )}
             </div>
           </form>
+          <Modal
+            modalOpen={modalOpenDelete}
+            setModalOpen={setModalOpenDelete}
+            content={
+              <DeleteDesign design={data} setModal={setModalOpenDelete} />
+            }
+          />
         </>
       )}
     </>

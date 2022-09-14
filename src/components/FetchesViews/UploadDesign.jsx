@@ -33,6 +33,7 @@ const fields = [
     id: 4,
     type: "file",
     name: "images",
+    accept: "image/png, image/jpeg",
     required: true,
     error: "please upload your design",
     multiple: true,

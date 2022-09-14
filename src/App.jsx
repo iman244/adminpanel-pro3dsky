@@ -19,11 +19,12 @@ import DesignService from "./Services/DesignService";
 import Product from "./views/Product/Product";
 
 /*
-design page same as main in front
-upload page want to be same as product page in front
-update and delete page in product page
-navbar padding,
+
+delete
+
 pro freebutton padding
+
+page 404
 
 */
 
@@ -55,18 +56,6 @@ function App() {
                     }
                   />
                   <Route
-                    path="/users/create"
-                    element={<Page content={<CreateUser />} />}
-                  />
-                  <Route
-                    path="/users/update"
-                    element={<Page content={<UpdateUser />} />}
-                  />
-                  <Route
-                    path="/users/delete"
-                    element={<Page content={<DeleteUser />} />}
-                  />
-                  <Route
                     path="/Design"
                     element={<Page content={<Designs />} />}
                   />
@@ -75,18 +64,9 @@ function App() {
                     element={<Page content={<UploadDesign />} />}
                   />
                   <Route
-                    path="/Design/update"
-                    element={<Page content={<UpdateDesign />} />}
-                  />
-                  <Route
-                    path="/Design/delete"
-                    element={<Page content={<DeleteDesign />} />}
-                  />
-                  <Route
                     path="/Design/:id"
                     element={<Page content={<Product />} />}
                   />
-
                   <Route path="*" element={<Page content={<Home />} />} />
                 </Route>
               </Routes>

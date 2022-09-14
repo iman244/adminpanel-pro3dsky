@@ -44,6 +44,7 @@ const Form = ({ use, isLoading, submitButton, fields, pattern }) => {
             {...register(field.name, {
               required: field.required,
             })}
+            accept={field.accept}
             placeholder=" "
             multiple={field.multiple}
           />

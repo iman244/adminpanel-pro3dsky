@@ -101,7 +101,8 @@ div.fetch-container {
   gap: 20px;
 }
 
-div.delete-user input[type="submit"] {
+div.delete-user input[type="submit"],
+div.delete-design input[type="submit"] {
   background-color: rgb(255, 68, 68);
 }
 
