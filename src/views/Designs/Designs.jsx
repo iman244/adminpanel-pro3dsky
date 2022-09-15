@@ -6,6 +6,19 @@ import Card from "./components/Card/Card";
 import ReactPaginate from "react-paginate";
 import { DesignContext } from "../../Services/DesignService";
 import ReactLoading from "react-loading";
+import Search from "../../components/Search/Search";
+import { sidebarList } from "./SidebarData";
+import Select from "react-select";
+
+const selectStyle = {
+  option: (styles) => ({ ...styles, textTransform: "capitalize" }),
+  control: (styles) => ({
+    ...styles,
+    padding: "0.1rem 0rem",
+    borderColor: "#d0d0d0",
+    textTransform: "capitalize",
+  }),
+};
 
 const Designs = () => {
   const {
@@ -18,13 +31,29 @@ const Designs = () => {
     itemsPerPage,
     DesignsCount,
     page,
-    keyword,
-    setKeyword,
+    name,
+    setName,
+    category,
+    setCategory,
   } = useContext(DesignContext);
 
   return (
     <div className="content design">
-      <ProFreeButtons />
+      <div className="headers">
+        <ProFreeButtons />
+        <Search
+          searchName="search in designs ..."
+          keyword={name}
+          setKeyword={setName}
+        />
+        <Select
+          defaultValue={category}
+          onChange={(d) => setCategory(d.value)}
+          placeholder="Categories"
+          options={sidebarList}
+          styles={selectStyle}
+        />
+      </div>
       <div className="cardList wrapper">
         {isLoading ? (
           <ReactLoading

@@ -4,6 +4,7 @@ import axios from "axios";
 import { useForm } from "react-hook-form";
 import Form from "../Form/Form";
 import { useMutation } from "react-query";
+import { useSnackbar } from "notistack";
 
 const fields = [
   {
@@ -24,11 +25,32 @@ const DeleteUser = ({ user, setModal }) => {
     formState: { errors },
   } = useForm();
 
-  const DeleteUserFetch = useMutation((id) => {
-    return fetch(`http://${process.env.REACT_APP_NETWORKIP}:3000/${id}`, {
-      method: "DELETE",
-    });
-  });
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+
+  const DeleteUserFetch = useMutation(
+    (id) => {
+      return fetch(
+        `http://${process.env.REACT_APP_NETWORKIP}:3000/users/${id}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
+    },
+    {
+      onSuccess: (data) => {
+        if (data.status === 200) {
+          enqueueSnackbar("success", {
+            variant: "success",
+            preventDuplicate: true,
+          });
+          setTimeout(function () {
+            window.location.reload();
+          }, 3000);
+        }
+      },
+    }
+  );
 
   const onSubmit = async (data) => {
     if (data.username === user.username) {
@@ -38,10 +60,7 @@ const DeleteUser = ({ user, setModal }) => {
     }
   };
 
-  useEffect(() => {
-    DeleteUserFetch.isSuccess && setModal(false);
-    DeleteUserFetch.isSuccess && window.location.reload();
-  });
+  useEffect(() => {});
 
   return (
     <div className="fetch-container delete-user">

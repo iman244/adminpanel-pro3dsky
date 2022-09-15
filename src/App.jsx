@@ -20,9 +20,9 @@ import Product from "./views/Product/Product";
 
 /*
 
-delete
-
+design toolbar - search, responsive sidebar, upload button
 pro freebutton padding
+
 
 page 404
 
@@ -39,39 +39,46 @@ function App() {
         style={{ width: "fit-content", minWidth: "0" }}
       >
         <LoginService>
-          <DesignService>
-            <BrowserRouter>
-              <Routes>
-                <Route element={<ProtectedRoute />}>
-                  <Route
-                    path="/users"
-                    element={
-                      <Page
-                        content={
-                          <UsersService>
-                            <Users />
-                          </UsersService>
-                        }
-                      />
-                    }
-                  />
-                  <Route
-                    path="/Design"
-                    element={<Page content={<Designs />} />}
-                  />
-                  <Route
-                    path="/Design/upload"
-                    element={<Page content={<UploadDesign />} />}
-                  />
-                  <Route
-                    path="/Design/:id"
-                    element={<Page content={<Product />} />}
-                  />
-                  <Route path="*" element={<Page content={<Home />} />} />
-                </Route>
-              </Routes>
-            </BrowserRouter>
-          </DesignService>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<ProtectedRoute />}>
+                <Route
+                  path="/users"
+                  element={
+                    <Page
+                      content={
+                        <UsersService>
+                          <Users />
+                        </UsersService>
+                      }
+                    />
+                  }
+                />
+
+                <Route
+                  path="/design"
+                  element={
+                    <Page
+                      content={
+                        <DesignService>
+                          <Designs />
+                        </DesignService>
+                      }
+                    />
+                  }
+                />
+                <Route
+                  path="/design/upload"
+                  element={<Page content={<UploadDesign />} />}
+                />
+                <Route
+                  path="/design/:id"
+                  element={<Page content={<Product />} />}
+                />
+                <Route path="*" element={<Page content={<Home />} />} />
+              </Route>
+            </Routes>
+          </BrowserRouter>
         </LoginService>
       </SnackbarProvider>
     </QueryClientProvider>
