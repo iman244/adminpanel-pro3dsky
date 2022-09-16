@@ -10,7 +10,8 @@ ul.container {
   color: #4182aa;
   text-transform: capitalize;
   font-weight: 500;
-  margin-bottom: 1vh;
+  margin-top: 15px;
+  margin-bottom: 15px;
   gap: 10px;
 }
 

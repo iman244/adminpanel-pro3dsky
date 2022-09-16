@@ -6,12 +6,17 @@ div.users-container {
   gap: 30px;
 }
 
+div.headers.DesignToolbar {
+  justify-content: center;
+}
+
 div.headers {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 30px;
+  gap: 10px;
   width: 100%;
+  flex-wrap: wrap;
 }
 
 div.users-container > div.top {
@@ -142,5 +147,9 @@ ul.container > li:hover > a.pagelink {
 @media only screen and (min-width: 992px) {
   div.users-grid {
     grid-template-columns: 15vw 15vw 15vw 15vw;
+  }
+
+  div.headers.DesignToolbar {
+    justify-content: space-between;
   }
 }

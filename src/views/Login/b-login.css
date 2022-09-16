@@ -92,7 +92,7 @@ page = page-center = page-login -->
   position: absolute;
   top: -30px;
   text-transform: capitalize;
-  color: red;
+  color: rgb(255, 125, 125);
 }
 
 .page-login .submit-button {

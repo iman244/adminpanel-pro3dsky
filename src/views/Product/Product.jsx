@@ -14,6 +14,7 @@ import { useSnackbar } from "notistack";
 import PageNotFound from "../404/PageNotFound";
 import Modal from "../Users/Modal";
 import DeleteDesign from "../../components/FetchesViews/DeleteDesign";
+import Error403 from "../../components/Error403/Error403";
 
 const fields = [
   {
@@ -61,7 +62,10 @@ const selectStyle = {
 
 const getDesign = async (id) => {
   const response = await fetch(
-    `http://${process.env.REACT_APP_NETWORKIP}:3000/designs/${id}`
+    `http://${process.env.REACT_APP_NETWORKIP}:3000/designs/${id}`,
+    {
+      credentials: "include",
+    }
   );
 
   return response.json();
@@ -122,7 +126,7 @@ const Product = () => {
           });
           setTimeout(function () {
             window.location.reload();
-          }, 3000);
+          }, 1500);
         } else if (data.status === 409) {
           enqueueSnackbar(`name is in database`, {
             variant: "error",
@@ -240,6 +244,8 @@ const Product = () => {
         <div>Error: {error.message}</div>
       ) : data.statusCode === 400 || data.statusCode === 404 ? (
         <PageNotFound />
+      ) : data.statusCode === 403 ? (
+        <Error403 />
       ) : (
         <>
           <form onSubmit={handleSubmit(onSubmit)}>

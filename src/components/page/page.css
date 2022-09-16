@@ -124,9 +124,9 @@ div.container.main {
     width: 100px;
   }
 
-  input.searchBar {
+  /* input.searchBar {
     width: 65vw;
-  }
+  } */
 
   .page-content {
     width: 100vw;
@@ -175,17 +175,9 @@ div.page.home {
 div.sidebar.container {
   box-sizing: border-box;
   min-width: 150px;
-  padding-left: var(--navPadding);
-}
-
-div.page > div.container {
-  /* padding-top: 2vh; */
 }
 
 div.main.container {
+  margin: 10px 20px 0;
   flex: 1;
-  /* display: flex;
-  align-items: center;
-  flex-direction: column;
-  gap: 20px; */
 }

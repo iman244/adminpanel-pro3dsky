@@ -27,6 +27,7 @@ const DeleteDesign = ({ design, setModal }) => {
       `http://${process.env.REACT_APP_NETWORKIP}:3000/designs/delete/${id}`,
       {
         method: "DELETE",
+        credentials: "include",
       }
     );
   });
@@ -57,7 +58,7 @@ const DeleteDesign = ({ design, setModal }) => {
         submitButton="delete design"
         fields={fields}
         isLoading={DeleteDesignFetch.isLoading}
-        pattern={new RegExp(`^${design.name}$`, "i")}
+        pattern={new RegExp(`^${design.name}$`)}
       />
     </div>
   );

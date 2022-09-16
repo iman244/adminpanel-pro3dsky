@@ -1,0 +1,4 @@
+.react-simple-image-viewer__next,
+.react-simple-image-viewer__previous {
+  height: fit-content !important;
+}

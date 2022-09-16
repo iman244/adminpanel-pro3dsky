@@ -2,12 +2,7 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import ProtectedRoute from "./Services/ProtectedRoute";
 import Page from "./components/page/Page";
-import CreateUser from "./components/FetchesViews/CreateUser";
-import UpdateUser from "./components/FetchesViews/UpdateUser";
-import DeleteUser from "./components/FetchesViews/DeleteUser";
 import UploadDesign from "./components/FetchesViews/UploadDesign";
-import UpdateDesign from "./components/FetchesViews/UpdateDesign";
-import DeleteDesign from "./components/FetchesViews/DeleteDesign";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Users from "./views/Users/Users";
 import LoginService from "./context/LoginService";
@@ -20,8 +15,8 @@ import Product from "./views/Product/Product";
 
 /*
 
-design toolbar - search, responsive sidebar, upload button
-pro freebutton padding
+proFree badge
+upload the real file and download it
 
 
 page 404

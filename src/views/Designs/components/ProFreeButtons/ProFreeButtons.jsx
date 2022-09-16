@@ -38,15 +38,6 @@ const ProFreeButtons = () => {
           free
         </button>
       </div>
-      <div className="sidebarOptions">
-        <Select
-          defaultValue={category}
-          onChange={(d) => setCategory(d.value)}
-          placeholder="Categories"
-          options={sidebarList}
-          styles={selectStyle}
-        />
-      </div>
     </div>
   );
 };

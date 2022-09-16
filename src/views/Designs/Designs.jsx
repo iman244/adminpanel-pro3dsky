@@ -9,6 +9,7 @@ import ReactLoading from "react-loading";
 import Search from "../../components/Search/Search";
 import { sidebarList } from "./SidebarData";
 import Select from "react-select";
+import Error403 from "../../components/Error403/Error403";
 
 const selectStyle = {
   option: (styles) => ({ ...styles, textTransform: "capitalize" }),
@@ -39,7 +40,7 @@ const Designs = () => {
 
   return (
     <div className="content design">
-      <div className="headers">
+      <div className="headers DesignToolbar">
         <ProFreeButtons />
         <Search
           searchName="search in designs ..."
@@ -66,37 +67,40 @@ const Designs = () => {
           <div>Error: {error.message}</div>
         ) : (
           <div className="grid-container">
-            {data &&
+            {data && data.statusCode === 403 ? (
+              <Error403 />
+            ) : (
               data.designs.map((card) => {
                 return (
                   <div className="card" key={card._id}>
                     <Card id={card._id} src={card.keyList} desc={card.name} />
                   </div>
                 );
-              })}
+              })
+            )}
           </div>
         )}
-      </div>
-      <div className="bottom">
-        <ReactPaginate
-          breakLabel="..."
-          nextLabel="forward"
-          onPageChange={(event) => setPage(event.selected + 1)}
-          pageRangeDisplayed={3}
-          pageCount={Math.ceil(DesignsCount / itemsPerPage)}
-          previousLabel="backward"
-          renderOnZeroPageCount={null}
-          pageClassName="page"
-          pageLinkClassName="pagelink"
-          previousClassName="previouse"
-          previousLinkClassName="previouselink"
-          nextClassName="next"
-          nextLinkClassName="nextlink"
-          breakClassName="break"
-          breakLinkClassName="breaklink"
-          containerClassName="container"
-          activeClassName="active"
-        />
+        <div className="bottom">
+          <ReactPaginate
+            breakLabel="..."
+            nextLabel="forward"
+            onPageChange={(event) => setPage(event.selected + 1)}
+            pageRangeDisplayed={3}
+            pageCount={Math.ceil(DesignsCount / itemsPerPage)}
+            previousLabel="backward"
+            renderOnZeroPageCount={null}
+            pageClassName="page"
+            pageLinkClassName="pagelink"
+            previousClassName="previouse"
+            previousLinkClassName="previouselink"
+            nextClassName="next"
+            nextLinkClassName="nextlink"
+            breakClassName="break"
+            breakLinkClassName="breaklink"
+            containerClassName="container"
+            activeClassName="active"
+          />
+        </div>
       </div>
     </div>
   );

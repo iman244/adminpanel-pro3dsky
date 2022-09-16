@@ -1,52 +1,53 @@
 ul.sidebar {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 1rem 0 0 1rem;
 }
 
 li.sidebar {
-    color: var(--basic);
-    font-weight: 400;
+  color: var(--basic);
+  font-weight: 400;
 }
 
 a.sidebar,
 a.apiList {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 a.sidebar:hover,
 a.apiList:hover {
-    color: var(--basicHover);
+  color: var(--basicHover);
 }
 
 span.sidebar {
-    text-transform: capitalize;
-    font-size: large;
+  text-transform: capitalize;
+  font-size: large;
 }
 
 i.sidebar {
-    margin-left: 0.5rem;
-    font-size: small;
+  margin-left: 0.5rem;
+  font-size: small;
 }
 
 a.selected {
-    color: #145278;
-    font-weight: 700;
+  color: #145278;
+  font-weight: 700;
 }
 
 ul.apiList {
-    display: flex;
-    flex-direction: column;
-    margin: 5px 0 0 10px;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0 0 10px;
+  gap: 5px;
 }
 
 div.apiList {
-    height: 66px;
-    transition: all 0.4s;
+  height: 66px;
+  transition: all 0.4s;
 }
 
 div.apiList.close {
-    height: 0;
-    overflow: hidden;
+  height: 0;
+  overflow: hidden;
 }
