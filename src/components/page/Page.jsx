@@ -3,10 +3,13 @@ import { Link } from "react-router-dom";
 import Sidebar from "./Sidebar/Sidebar";
 import "./page.css";
 import SidebarMenu from "./SidebarMenu/SidebarMenu";
+import { useContext } from "react";
+import { AppContext } from "../../Services/AppService";
 
 const Page = ({ content }) => {
   const [viewPortSizeSmall, setViewPortSizeSmall] = useState(true);
   const [sidebarMenuShow, setSidebarMenuShow] = useState(false);
+  const { endOfSession } = useContext(AppContext);
 
   const handleView = () => {
     if (window.innerWidth <= 576) {
@@ -20,7 +23,7 @@ const Page = ({ content }) => {
   const handleSignOut = () => {
     document.cookie =
       "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    window.location.reload();
+    endOfSession("logout");
   };
 
   useEffect(() => {
@@ -33,12 +36,10 @@ const Page = ({ content }) => {
         /(?<=access_token=)[\s\S]+(?=;*)/
       )[0];
       if (!access_token) {
-        alert("Your session is expired! please login again");
-        window.location.reload();
+        endOfSession("cookieProblem");
       }
     } else {
-      alert("Your session is expired! please login again");
-      window.location.reload();
+      endOfSession("cookieProblem");
     }
   });
 

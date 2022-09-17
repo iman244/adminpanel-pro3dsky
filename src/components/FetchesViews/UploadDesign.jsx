@@ -38,6 +38,15 @@ const fields = [
     error: "please upload your design",
     multiple: true,
   },
+  {
+    id: 5,
+    type: "file",
+    name: "rarFile",
+    accept: ".rar",
+    required: true,
+    error: "please upload your rar file",
+    multiple: false,
+  },
 ];
 
 const UploadDesign = () => {
@@ -65,17 +74,39 @@ const UploadDesign = () => {
     },
     {
       onSuccess: (data) => {
+        console.log(data);
         if (data.status === 201) {
           enqueueSnackbar("success", {
             variant: "success",
             preventDuplicate: true,
           });
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
         } else if (data.status === 409) {
           enqueueSnackbar(`name is in database`, {
             variant: "error",
             preventDuplicate: true,
           });
+        } else if (data.status === 403) {
+          enqueueSnackbar("Your session is expired! please login again", {
+            variant: "error",
+            preventDuplicate: true,
+          });
+
+          setTimeout(() => {
+            window.location.reload();
+          }, 2000);
         }
+      },
+      onError: (error) => {
+        enqueueSnackbar(error.message, {
+          variant: "error",
+          preventDuplicate: true,
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       },
     }
   );
@@ -83,9 +114,9 @@ const UploadDesign = () => {
   const onSubmit = (data) => {
     let formData = new FormData();
     for (const name in data) {
-      if (name === "images") {
+      if (name === "images" || name === "rarFile") {
         for (let i = 0; i < data[name].length; i++) {
-          formData.append(`images`, data[name][i]);
+          formData.append(name, data[name][i]);
         }
       } else if (name === "category") {
         formData.append(name, data[name]["value"]);

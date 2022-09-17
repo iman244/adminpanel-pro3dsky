@@ -66,41 +66,43 @@ const Designs = () => {
         ) : isError ? (
           <div>Error: {error.message}</div>
         ) : (
-          <div className="grid-container">
-            {data && data.statusCode === 403 ? (
-              <Error403 />
-            ) : (
-              data.designs.map((card) => {
-                return (
-                  <div className="card" key={card._id}>
-                    <Card id={card._id} src={card.keyList} desc={card.name} />
-                  </div>
-                );
-              })
-            )}
-          </div>
+          <>
+            <div className="grid-container">
+              {data && data.statusCode === 403 ? (
+                <Error403 />
+              ) : (
+                data.designs.map((card) => {
+                  return (
+                    <div className="card" key={card._id}>
+                      <Card id={card._id} src={card.keyList} desc={card.name} />
+                    </div>
+                  );
+                })
+              )}
+            </div>
+            <div className="bottom">
+              <ReactPaginate
+                breakLabel="..."
+                nextLabel="forward"
+                onPageChange={(event) => setPage(event.selected + 1)}
+                pageRangeDisplayed={3}
+                pageCount={Math.ceil(DesignsCount / itemsPerPage)}
+                previousLabel="backward"
+                renderOnZeroPageCount={null}
+                pageClassName="page"
+                pageLinkClassName="pagelink"
+                previousClassName="previouse"
+                previousLinkClassName="previouselink"
+                nextClassName="next"
+                nextLinkClassName="nextlink"
+                breakClassName="break"
+                breakLinkClassName="breaklink"
+                containerClassName="container"
+                activeClassName="active"
+              />
+            </div>
+          </>
         )}
-        <div className="bottom">
-          <ReactPaginate
-            breakLabel="..."
-            nextLabel="forward"
-            onPageChange={(event) => setPage(event.selected + 1)}
-            pageRangeDisplayed={3}
-            pageCount={Math.ceil(DesignsCount / itemsPerPage)}
-            previousLabel="backward"
-            renderOnZeroPageCount={null}
-            pageClassName="page"
-            pageLinkClassName="pagelink"
-            previousClassName="previouse"
-            previousLinkClassName="previouselink"
-            nextClassName="next"
-            nextLinkClassName="nextlink"
-            breakClassName="break"
-            breakLinkClassName="breaklink"
-            containerClassName="container"
-            activeClassName="active"
-          />
-        </div>
       </div>
     </div>
   );

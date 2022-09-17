@@ -8,9 +8,7 @@ import Login from "../views/Login/Login";
 const ProtectedRoute = ({ children }) => {
   const { sec } = useContext(LoginServiceContext);
 
-  useEffect(() => {
-    console.log(sec);
-  });
+  useEffect(() => {});
 
   return (
     <>
