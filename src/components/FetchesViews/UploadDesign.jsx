@@ -1,8 +1,10 @@
 import { useSnackbar } from "notistack";
 import React from "react";
+import { useContext } from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
+import { AppContext } from "../../Services/AppService";
 import Form from "../Form/Form";
 
 const fields = [
@@ -50,6 +52,7 @@ const fields = [
 ];
 
 const UploadDesign = () => {
+  const { errorUI } = useContext(AppContext);
   const {
     control,
     register,
@@ -112,19 +115,28 @@ const UploadDesign = () => {
   );
 
   const onSubmit = (data) => {
-    let formData = new FormData();
-    for (const name in data) {
-      if (name === "images" || name === "rarFile") {
-        for (let i = 0; i < data[name].length; i++) {
-          formData.append(name, data[name][i]);
+    try {
+      let formData = new FormData();
+      for (const name in data) {
+        if (name === "images" || name === "rarFile") {
+          for (let i = 0; i < data[name].length; i++) {
+            formData.append(name, data[name][i]);
+          }
+        } else if (name === "category") {
+          formData.append(name, data[name]["value"]);
+        } else {
+          formData.append(name, data[name]);
         }
-      } else if (name === "category") {
-        formData.append(name, data[name]["value"]);
-      } else {
-        formData.append(name, data[name]);
       }
+      console.log("mutate start");
+      uploadDesignFetch.mutate(formData);
+    } catch (error) {
+      console.dir(error);
+      enqueueSnackbar("please select a category", {
+        variant: "error",
+        preventDuplicate: true,
+      });
     }
-    uploadDesignFetch.mutate(formData);
   };
 
   useEffect(() => {});

@@ -80,29 +80,29 @@ const Designs = () => {
                 })
               )}
             </div>
-            <div className="bottom">
-              <ReactPaginate
-                breakLabel="..."
-                nextLabel="forward"
-                onPageChange={(event) => setPage(event.selected + 1)}
-                pageRangeDisplayed={3}
-                pageCount={Math.ceil(DesignsCount / itemsPerPage)}
-                previousLabel="backward"
-                renderOnZeroPageCount={null}
-                pageClassName="page"
-                pageLinkClassName="pagelink"
-                previousClassName="previouse"
-                previousLinkClassName="previouselink"
-                nextClassName="next"
-                nextLinkClassName="nextlink"
-                breakClassName="break"
-                breakLinkClassName="breaklink"
-                containerClassName="container"
-                activeClassName="active"
-              />
-            </div>
           </>
         )}
+      </div>
+      <div className="bottom">
+        <ReactPaginate
+          breakLabel="..."
+          nextLabel="forward"
+          onPageChange={(event) => setPage(event.selected + 1)}
+          pageRangeDisplayed={3}
+          pageCount={Math.ceil(DesignsCount / itemsPerPage)}
+          previousLabel="backward"
+          renderOnZeroPageCount={null}
+          pageClassName="page"
+          pageLinkClassName="pagelink"
+          previousClassName="previouse"
+          previousLinkClassName="previouselink"
+          nextClassName="next"
+          nextLinkClassName="nextlink"
+          breakClassName="break"
+          breakLinkClassName="breaklink"
+          containerClassName="container"
+          activeClassName="active"
+        />
       </div>
     </div>
   );

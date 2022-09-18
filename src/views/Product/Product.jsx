@@ -12,9 +12,10 @@ import { selectOptionsDesign } from "../../components/Form/selectOptionsDesign";
 import ReactLoading from "react-loading";
 import { useSnackbar } from "notistack";
 import PageNotFound from "../404/PageNotFound";
+import Error403 from "../../components/Error403/Error403";
 import Modal from "../Users/Modal";
 import DeleteDesign from "../../components/FetchesViews/DeleteDesign";
-import Error403 from "../../components/Error403/Error403";
+import DownloadButton from "../../components/Buttons/DownloadButton";
 
 const fields = [
   {
@@ -33,13 +34,6 @@ const fields = [
     divClassName: "isAdmin",
   },
   {
-    id: 1,
-    type: "text",
-    name: "name",
-    required: true,
-    error: "please eneter a name for new design",
-  },
-  {
     id: 4,
     type: "file",
     name: "images",
@@ -47,6 +41,15 @@ const fields = [
     required: false,
     error: "please upload your design",
     multiple: true,
+  },
+  {
+    id: 5,
+    type: "file",
+    name: "rarFile",
+    accept: ".rar",
+    required: false,
+    error: "please upload your design",
+    multiple: false,
   },
 ];
 
@@ -66,6 +69,15 @@ const getDesign = async (id) => {
     {
       credentials: "include",
     }
+  );
+
+  return response.json();
+};
+
+const getFile = async (id) => {
+  const response = await fetch(
+    `http://${process.env.REACT_APP_NETWORKIP}:3000/file/${id}`,
+    { method: "GET", credentials: "include" }
   );
 
   return response.json();
@@ -103,6 +115,7 @@ const Product = () => {
       setI(findIinSelectOptionsDesign(data));
     },
   });
+  const file = useQuery("file", () => getFile(params.id), {});
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const updateDesignFetch = useMutation(
@@ -262,6 +275,14 @@ const Product = () => {
                     }
                   </div>
                   <div className="descAndDownload">
+                    <div className="d-wrapper">
+                      <span className="d-label" title="Name">
+                        name:
+                      </span>
+                      <span className="d" title={design.data.name}>
+                        {design.data.name}
+                      </span>
+                    </div>
                     {fields.map((field) => (
                       <div
                         className={
@@ -272,7 +293,7 @@ const Product = () => {
                         key={field.id}
                       >
                         {input(field, i)}
-                        {field.type !== "select" && field.type !== "file" && (
+                        {field.type !== "select" && (
                           <label htmlFor={field.name}>{field.name}</label>
                         )}
                         {errors[field.name] && (
@@ -281,15 +302,30 @@ const Product = () => {
                       </div>
                     ))}
 
-                    <div className="submit">
-                      <input type="submit" value="update" className="submit" />
-                      <button
-                        type="button"
-                        className="delete"
-                        onClick={() => setModalOpenDelete(true)}
-                      >
-                        delete
-                      </button>
+                    <div className="updatePage-buttons">
+                      <div className="submit">
+                        <input
+                          type="submit"
+                          value="update"
+                          className="submit"
+                        />
+                        <button
+                          type="button"
+                          className="delete"
+                          onClick={() => setModalOpenDelete(true)}
+                        >
+                          delete
+                        </button>
+                      </div>
+                      <DownloadButton
+                        buttonStyle={{
+                          borderRadius: "3px",
+                          padding: "10px 20px",
+                        }}
+                        downloadLink={
+                          file.isSuccess ? file.data.preSignedURL : "#"
+                        }
+                      />
                     </div>
                   </div>
                 </div>

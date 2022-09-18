@@ -1,34 +1,35 @@
-button.download {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 5px;
+a.download {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  width: fit-content;
 
-    background-color: var(--cardDownload);
-    border: 2px solid var(--basic);
-    border-radius: 8px;
+  background-color: var(--cardDownload);
+  border: 2px solid var(--basic);
+  border-radius: 8px;
 
-    cursor: pointer;
-    padding: 0.3rem 0.6rem;
+  cursor: pointer;
+  padding: 0.3rem 0.6rem;
 
-    transition: background-color 0.1s ease-out;
+  transition: background-color 0.1s ease-out;
 }
 
 span.download {
-    text-transform: capitalize;
-    font-size: small;
-    font-weight: 500;
+  text-transform: capitalize;
+  font-size: small;
+  font-weight: 500;
 }
 
 i.download {
-    color: var(--basic);
+  color: var(--basic);
 }
 
-button.download:hover {
-    background-color: var(--basic);
+a.download:hover {
+  background-color: var(--basic);
 }
 
-button.download:hover span.download,
-button.download:hover i.download {
-    color: white;
+a.download:hover span.download,
+a.download:hover i.download {
+  color: white;
 }

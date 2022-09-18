@@ -55,7 +55,9 @@ const CardImg = ({ id, src, desc }) => {
         </div>
       </Link>
       <div className="download">
-        <DownloadButton />
+        <Link to={`${id}`}>
+          <DownloadButton />
+        </Link>
       </div>
       {isViewerOpen && (
         <ImageViewer

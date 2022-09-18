@@ -16,17 +16,6 @@ import AppService from "./Services/AppService";
 
 /*
 
-delete design must delete rarfile in s3 too
-
-category not chosen don't error in uploadImages
-
-we must check for error in uploadImages, for example if error happened do really no data save in mongodb and ArvanCloud?
-
-proFree badge
-upload the real file and download it
-
-originalname may be same in /uploads backend
-
 page 404
 
 */

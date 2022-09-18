@@ -8,8 +8,6 @@ import Login from "../views/Login/Login";
 const ProtectedRoute = ({ children }) => {
   const { sec } = useContext(LoginServiceContext);
 
-  useEffect(() => {});
-
   return (
     <>
       {document.cookie ? (
@@ -20,10 +18,12 @@ const ProtectedRoute = ({ children }) => {
             ) : (
               <Outlet />
             )
+          ) : children ? (
+            children
           ) : (
-            <Login />
+            <Outlet />
           )
-        ) : sec.isLoading ? (
+        ) : (
           <div className="loading">
             <ReactLoading
               type={"bars"}
@@ -32,11 +32,11 @@ const ProtectedRoute = ({ children }) => {
               width={"30%"}
             />
           </div>
-        ) : (
-          <Login />
         )
       ) : (
-        <Login />
+        <>
+          <Login />
+        </>
       )}
     </>
   );

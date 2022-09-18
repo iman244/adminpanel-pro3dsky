@@ -6,7 +6,10 @@ export const AppContext = createContext();
 const AppService = ({ children }) => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
-  const endOfSession = (type) => {
+  const errorUI = (
+    type,
+    message = "if you see this, then you need provide message as a second variable"
+  ) => {
     switch (type) {
       case "logout":
         enqueueSnackbar("you have been logout successfully", {
@@ -19,15 +22,19 @@ const AppService = ({ children }) => {
           variant: "error",
           preventDuplicate: true,
         });
+        break;
+      case "custom":
+        enqueueSnackbar(message, {
+          variant: "error",
+          preventDuplicate: true,
+        });
     }
     setTimeout(() => {
       window.location.reload();
     }, 2000);
   };
   return (
-    <AppContext.Provider value={{ endOfSession }}>
-      {children}
-    </AppContext.Provider>
+    <AppContext.Provider value={{ errorUI }}>{children}</AppContext.Provider>
   );
 };
 

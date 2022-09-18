@@ -8,6 +8,7 @@ import { UsersContext } from "./UsersService";
 import Search from "../../components/Search/Search";
 import LoaderPaginate from "./LoaderPaginate";
 import ReactLoading from "react-loading";
+import Error403 from "../../components/Error403/Error403";
 
 const Users = () => {
   const [modalOpenCreate, setModalOpenCreate] = useState(false);
@@ -73,13 +74,17 @@ const Users = () => {
           <div>Error: {error.message}</div>
         ) : (
           <div className="users-grid">
-            {data.users.map((user) => (
-              <UserCard key={user.username} user={user} />
-            ))}
+            {data.statusCode === 403 ? (
+              <Error403 />
+            ) : (
+              data.users.map((user) => (
+                <UserCard key={user.username} user={user} />
+              ))
+            )}
           </div>
         )}
 
-        {isFetching ? <span> Loading...</span> : null}
+        {isFetching ? <span>Loading...</span> : null}
         <Modal
           modalOpen={modalOpenCreate}
           setModalOpen={setModalOpenCreate}
