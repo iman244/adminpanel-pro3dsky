@@ -176,9 +176,9 @@ const Product = () => {
     }
     let formData = new FormData();
     for (const name in data) {
-      if (name === "images") {
+      if (name === "images" || name === "rarFile") {
         for (let i = 0; i < data[name].length; i++) {
-          formData.append(`images`, data[name][i]);
+          formData.append(name, data[name][i]);
         }
       } else if (name === "category") {
         formData.append(name, data[name]["value"]);
