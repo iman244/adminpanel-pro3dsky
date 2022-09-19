@@ -23,7 +23,7 @@ const SearchUsersFetch = async (keyword = "", page = 1, limit = 1) => {
 const UsersService = ({ children }) => {
   const [page, setPage] = useState(1);
   const [keyword, setKeyword] = useState("");
-  const itemsPerPage = 6;
+  const itemsPerPage = 16;
   const { isLoading, isError, status, error, data } = useQuery(
     ["users", page, keyword],
     () => getAllUsersFetch(keyword, page, itemsPerPage)

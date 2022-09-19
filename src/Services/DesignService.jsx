@@ -28,7 +28,7 @@ const DesignService = ({ children }) => {
   const [pro, setPro] = useState(false);
   const [free, setFree] = useState(false);
   const [category, setCategory] = useState("");
-  const itemsPerPage = 6;
+  const itemsPerPage = 20;
   const { isLoading, isError, status, error, data } = useQuery(
     ["designs", page, name, pro, free, category],
     () => getDesignsFetch(name, pro, free, category, page, itemsPerPage)
