@@ -65,7 +65,7 @@ const selectStyle = {
 
 const getDesign = async (id) => {
   const response = await fetch(
-    `http://${process.env.REACT_APP_NETWORKIP}:3000/designs/${id}`,
+    `http://${process.env.REACT_APP_NETWORKIP}/designs/${id}`,
     {
       credentials: "include",
     }
@@ -76,7 +76,7 @@ const getDesign = async (id) => {
 
 const getFile = async (id) => {
   const response = await fetch(
-    `http://${process.env.REACT_APP_NETWORKIP}:3000/file/${id}`,
+    `http://${process.env.REACT_APP_NETWORKIP}/file/${id}`,
     { method: "GET", credentials: "include" }
   );
 

@@ -12,9 +12,7 @@ const getDesignsFetch = async (
   limit = 1
 ) => {
   const response = await fetch(
-    `http://${
-      process.env.REACT_APP_NETWORKIP
-    }:3000/designs?name=${name}&isPremium=${
+    `http://${process.env.REACT_APP_NETWORKIP}/designs?name=${name}&isPremium=${
       pro ? (free ? "" : true) : free ? false : ""
     }&category=${category}&page=${page}&limit=${limit}`,
     { method: "GET", credentials: "include" }

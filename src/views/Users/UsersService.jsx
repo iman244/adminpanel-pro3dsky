@@ -1,12 +1,11 @@
-import axios from "axios";
 import React, { createContext, useEffect, useState } from "react";
-import { useMutation, useQuery } from "react-query";
+import { useQuery } from "react-query";
 
 export const UsersContext = createContext();
 
 const getAllUsersFetch = async (keyword = "", page = 1, limit = 1) => {
   const response = await fetch(
-    `http://${process.env.REACT_APP_NETWORKIP}:3000/users?keyword=${keyword}&page=${page}&limit=${limit}`,
+    `http://${process.env.REACT_APP_NETWORKIP}/users?keyword=${keyword}&page=${page}&limit=${limit}`,
     { method: "GET", credentials: "include" }
   );
   return response.json();
@@ -14,7 +13,7 @@ const getAllUsersFetch = async (keyword = "", page = 1, limit = 1) => {
 
 const SearchUsersFetch = async (keyword = "", page = 1, limit = 1) => {
   const response = await fetch(
-    `http://${process.env.REACT_APP_NETWORKIP}:3000/users/search?page=${page}&limit=${limit}`,
+    `http://${process.env.REACT_APP_NETWORKIP}/users/search?page=${page}&limit=${limit}`,
     { method: "GET", credentials: "include" }
   );
   return response.json();

@@ -7,7 +7,7 @@ export const LoginServiceContext = createContext();
 const LoginService = ({ children }) => {
   const LoginUserFetch = useMutation((data) => {
     return axios.post(
-      `http://${process.env.REACT_APP_NETWORKIP}:3000/auth/login`,
+      `http://${process.env.REACT_APP_NETWORKIP}/auth/login`,
       data,
       {
         withCredentials: true,
@@ -15,7 +15,7 @@ const LoginService = ({ children }) => {
     );
   });
   const sec = useMutation((data) => {
-    return axios.post(`http://${process.env.REACT_APP_NETWORKIP}:3000/`, data, {
+    return axios.post(`http://${process.env.REACT_APP_NETWORKIP}/`, data, {
       withCredentials: true,
     });
   });

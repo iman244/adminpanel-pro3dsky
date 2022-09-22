@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import "./designs.css";
 import "./paginate.css";
 import ProFreeButtons from "./components/ProFreeButtons/ProFreeButtons";
