@@ -2,6 +2,7 @@
   "name": "admin",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://api.pro3dsky.com",
   "dependencies": {
     "@emotion/styled": "^11.10.4",
     "@testing-library/jest-dom": "^5.16.5",

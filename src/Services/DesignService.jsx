@@ -15,7 +15,7 @@ const getDesignsFetch = async (
     `http://${process.env.REACT_APP_NETWORKIP}/designs?name=${name}&isPremium=${
       pro ? (free ? "" : true) : free ? false : ""
     }&category=${category}&page=${page}&limit=${limit}`,
-    { method: "GET", credentials: "include" }
+    { method: "GET", credentials: "include", mode: "no-cors" }
   );
   return response.json();
 };

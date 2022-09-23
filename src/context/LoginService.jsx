@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { createContext, useEffect } from "react";
 import { useMutation } from "react-query";
 
@@ -6,17 +5,19 @@ export const LoginServiceContext = createContext();
 
 const LoginService = ({ children }) => {
   const LoginUserFetch = useMutation((data) => {
-    return axios.post(
-      `http://${process.env.REACT_APP_NETWORKIP}/auth/login`,
-      data,
-      {
-        withCredentials: true,
-      }
-    );
+    return fetch(`http://${process.env.REACT_APP_NETWORKIP}/auth/login`, {
+      method: "POST",
+      credentials: "include",
+      mode: "no-cors",
+      body: JSON.stringify(data),
+    });
   });
   const sec = useMutation((data) => {
-    return axios.post(`http://${process.env.REACT_APP_NETWORKIP}/`, data, {
-      withCredentials: true,
+    return fetch(`http://${process.env.REACT_APP_NETWORKIP}/`, {
+      method: "POST",
+      credentials: "include",
+      mode: "no-cors",
+      body: JSON.stringify(data),
     });
   });
 

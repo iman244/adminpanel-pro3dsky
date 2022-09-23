@@ -18,10 +18,8 @@ const ProtectedRoute = ({ children }) => {
             ) : (
               <Outlet />
             )
-          ) : children ? (
-            children
           ) : (
-            <Outlet />
+            <Login />
           )
         ) : (
           <div className="loading">
