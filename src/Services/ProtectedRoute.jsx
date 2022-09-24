@@ -9,15 +9,13 @@ import { useEffect } from "react";
 const ProtectedRoute = ({ children }) => {
   const { sec } = useContext(LoginServiceContext);
 
-  useEffect(() => {
-    console.log(sec);
-  });
+  useEffect(() => {});
 
   return (
     <>
       {document.cookie ? (
-        sec.data ? (
-          sec.data.data ? (
+        sec.isSuccess ? (
+          sec.data ? (
             children ? (
               children
             ) : (
