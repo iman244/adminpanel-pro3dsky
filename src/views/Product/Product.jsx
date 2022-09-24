@@ -123,9 +123,8 @@ const Product = () => {
       return await fetch(
         `http://${process.env.REACT_APP_NETWORKIP}:3000/designs/update/${params.id}`,
         {
-          credentials: "include",
           method: "PUT",
-          mode: "cors",
+          credentials: "include",
           body: data,
         }
       );

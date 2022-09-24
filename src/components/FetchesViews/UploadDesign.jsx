@@ -68,9 +68,8 @@ const UploadDesign = () => {
       return await fetch(
         `http://${process.env.REACT_APP_NETWORKIP}:3000/designs/upload`,
         {
-          credentials: "include",
           method: "POST",
-          mode: "cors",
+          credentials: "include",
           body: data,
         }
       );

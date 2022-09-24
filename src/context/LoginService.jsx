@@ -20,8 +20,10 @@ const LoginService = ({ children }) => {
     return fetch(`http://${process.env.REACT_APP_NETWORKIP}/`, {
       method: "POST",
       credentials: "include",
-      mode: "no-cors",
       body: JSON.stringify(data),
+      headers: {
+        "Content-Type": "application/json",
+      },
     });
   });
 
