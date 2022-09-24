@@ -4,9 +4,14 @@ import { LoginServiceContext } from "../context/LoginService";
 import ReactLoading from "react-loading";
 import "./reactLoadingCss.css";
 import Login from "../views/Login/Login";
+import { useEffect } from "react";
 
 const ProtectedRoute = ({ children }) => {
   const { sec } = useContext(LoginServiceContext);
+
+  useEffect(() => {
+    console.log(sec);
+  });
 
   return (
     <>
@@ -19,7 +24,10 @@ const ProtectedRoute = ({ children }) => {
               <Outlet />
             )
           ) : (
-            <Login />
+            <>
+              {console.log("we are in 2")}
+              <Login />
+            </>
           )
         ) : (
           <div className="loading">
@@ -33,6 +41,7 @@ const ProtectedRoute = ({ children }) => {
         )
       ) : (
         <>
+          {console.log("we are in 4")}
           <Login />
         </>
       )}
