@@ -16,8 +16,8 @@ const LoginService = ({ children }) => {
     });
   });
 
-  const sec = useMutation((data) => {
-    return fetch(`http://${process.env.REACT_APP_NETWORKIP}/`, {
+  const sec = useMutation(async (data) => {
+    return await fetch(`http://${process.env.REACT_APP_NETWORKIP}/`, {
       method: "POST",
       credentials: "include",
       body: JSON.stringify(data),
