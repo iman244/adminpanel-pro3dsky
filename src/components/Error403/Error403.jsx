@@ -7,7 +7,10 @@ const Error403 = () => {
       <p className="error">
         Your session is expired! you will redirect to login page
       </p>
-      {setTimeout(() => window.location.reload(), 2000)}
+      {
+        console.log("error 403 relaod")
+        /* {setTimeout(() => window.location.reload(), 2000)} */
+      }
     </>
   );
 };
