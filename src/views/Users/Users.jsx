@@ -67,8 +67,8 @@ const Users = () => {
           <ReactLoading
             type={"bars"}
             color={"gray"}
-            height={"30%"}
-            width={"30%"}
+            height={"fit-content"}
+            width={"200px"}
           />
         ) : isError ? (
           <div>Error: {error.message}</div>

@@ -28,10 +28,12 @@ const AppService = ({ children }) => {
           variant: "error",
           preventDuplicate: true,
         });
+        break;
     }
-    setTimeout(() => {
-      window.location.reload();
-    }, 2000);
+    console.log("now window.location.reload will be run, type is:", type);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 2000);
   };
   return (
     <AppContext.Provider value={{ errorUI }}>{children}</AppContext.Provider>
