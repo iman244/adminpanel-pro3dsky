@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./designs.css";
 import "./paginate.css";
 import ProFreeButtons from "./components/ProFreeButtons/ProFreeButtons";
@@ -10,6 +10,7 @@ import Search from "../../components/Search/Search";
 import { sidebarList } from "./SidebarData";
 import Select from "react-select";
 import Error403 from "../../components/Error403/Error403";
+import { Link } from "react-router-dom";
 
 const selectStyle = {
   option: (styles) => ({ ...styles, textTransform: "capitalize" }),
@@ -22,6 +23,8 @@ const selectStyle = {
 };
 
 const Designs = () => {
+  const [viewPortSizeSmall, setViewPortSizeSmall] = useState(true);
+
   const {
     isLoading,
     isError,
@@ -37,6 +40,20 @@ const Designs = () => {
     category,
     setCategory,
   } = useContext(DesignContext);
+
+  const handleView = () => {
+    if (window.innerWidth <= 768) {
+      setViewPortSizeSmall(true);
+    } else {
+      setViewPortSizeSmall(false);
+    }
+  };
+
+  window.addEventListener("resize", handleView);
+
+  useEffect(() => {
+    handleView();
+  }, []);
 
   return (
     <div className="content design">
@@ -54,14 +71,26 @@ const Designs = () => {
           options={sidebarList}
           styles={selectStyle}
         />
+        <Link
+          to="/design/upload"
+          className="upload-new-design"
+          title="upload new design"
+        >
+          <i className="fa-solid fa-plus"></i>
+          {viewPortSizeSmall ? (
+            <i className="fa-solid fa-chair design"></i>
+          ) : (
+            <span>upload new design</span>
+          )}
+        </Link>
       </div>
       <div className="cardList wrapper">
         {isLoading ? (
           <ReactLoading
             type={"bars"}
             color={"gray"}
-            height={"30%"}
-            width={"20%"}
+            height={"fit-content"}
+            width={"200px"}
           />
         ) : isError ? (
           <div>Error: {error.message}</div>
@@ -70,7 +99,7 @@ const Designs = () => {
             <div className="grid-container">
               {data && data.statusCode === 403 ? (
                 <Error403 />
-              ) : (
+              ) : data.totalDesigns ? (
                 data.designs.map((card) => {
                   return (
                     <div className="card" key={card._id}>
@@ -78,6 +107,13 @@ const Designs = () => {
                     </div>
                   );
                 })
+              ) : (
+                <p>
+                  there is no item to show please{" "}
+                  <Link to="/design/upload" className="textLink">
+                    upload new item!
+                  </Link>
+                </p>
               )}
             </div>
           </>

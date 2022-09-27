@@ -4,8 +4,6 @@ import { Controller } from "react-hook-form";
 import Select from "react-select";
 import { selectOptionsDesign } from "./selectOptionsDesign";
 import "./form.css";
-import Modal from "../../views/Users/Modal";
-import UploadFiles from "../../views/Product/UploadFiles";
 
 const selectStyle = {
   option: (styles) => ({ ...styles, textTransform: "capitalize" }),
@@ -17,7 +15,14 @@ const selectStyle = {
   }),
 };
 
-const Form = ({ use, isLoading, submitButton, fields, pattern }) => {
+const Form = ({
+  use,
+  isLoading,
+  LoadingComponent,
+  submitButton,
+  fields,
+  pattern,
+}) => {
   const { control, register, handleSubmit, errors, onSubmit } = use;
   const [modalUploadFile, setModalUploadFile] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);

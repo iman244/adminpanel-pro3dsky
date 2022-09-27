@@ -13,7 +13,7 @@ const AppService = ({ children }) => {
     switch (type) {
       case "logout":
         enqueueSnackbar("you have been logout successfully", {
-          variant: "success",
+          variant: "info",
           preventDuplicate: true,
         });
         break;

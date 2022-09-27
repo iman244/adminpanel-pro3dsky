@@ -24,7 +24,7 @@ const DeleteDesign = ({ design, setModal }) => {
 
   const DeleteDesignFetch = useMutation((id) => {
     return fetch(
-      `http://${process.env.REACT_APP_NETWORKIP}:3000/designs/delete/${id}`,
+      `http://${process.env.REACT_APP_NETWORKIP}/designs/delete/${id}`,
       {
         method: "DELETE",
         credentials: "include",

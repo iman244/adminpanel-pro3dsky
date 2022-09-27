@@ -38,7 +38,7 @@ const CreateUser = ({ setModal }) => {
   } = useForm();
   const createUserFetch = useMutation((data) => {
     return axios.post(
-      `http://${process.env.REACT_APP_NETWORKIP}:3000/users/register`,
+      `http://${process.env.REACT_APP_NETWORKIP}/users/register`,
       data,
       {
         withCredentials: true,

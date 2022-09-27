@@ -16,6 +16,7 @@ import Error403 from "../../components/Error403/Error403";
 import Modal from "../Users/Modal";
 import DeleteDesign from "../../components/FetchesViews/DeleteDesign";
 import DownloadButton from "../../components/Buttons/DownloadButton";
+import "./uploadFiles.css";
 
 const fields = [
   {
@@ -85,7 +86,7 @@ const getFile = async (id) => {
 
 function findIinSelectOptionsDesign(data) {
   if (data) {
-    for (let i = 1; i < selectOptionsDesign.length; i++) {
+    for (let i = 0; i < selectOptionsDesign.length; i++) {
       if (selectOptionsDesign[i].value === data.category) return i;
     }
   } else {
@@ -95,6 +96,7 @@ function findIinSelectOptionsDesign(data) {
 
 const Product = () => {
   let params = useParams();
+  const [rarFile, setRarFile] = useState();
   const [modalOpenDelete, setModalOpenDelete] = useState(false);
   const [i, setI] = useState();
 
@@ -102,8 +104,7 @@ const Product = () => {
     control,
     register,
     handleSubmit,
-    watch,
-    reset,
+    getValues,
     setValue,
     formState: { errors },
   } = useForm();
@@ -120,31 +121,76 @@ const Product = () => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const updateDesignFetch = useMutation(
     async (data) => {
-      return await fetch(
-        `http://${process.env.REACT_APP_NETWORKIP}:3000/designs/update/${params.id}`,
+      const response = await fetch(
+        `http://${process.env.REACT_APP_NETWORKIP}/designs/update/${params.id}`,
         {
           method: "PUT",
           credentials: "include",
           body: data,
         }
       );
+      return response.json();
     },
     {
-      onSuccess: (data) => {
-        if (data.status === 200) {
-          enqueueSnackbar("success", {
-            variant: "success",
-            preventDuplicate: true,
-          });
-          setTimeout(function () {
-            window.location.reload();
-          }, 1500);
-        } else if (data.status === 409) {
+      onSuccess: async (data) => {
+        if (
+          data.status === 200 ||
+          data.statusCode === 201 ||
+          data.PresignedPost
+        ) {
+          if (getValues("rarFile")[0]) {
+            enqueueSnackbar(
+              "upload start. please don't refresh page till success",
+              {
+                variant: "info",
+                preventDuplicate: true,
+              }
+            );
+
+            const { url, fields } = data.PresignedPost;
+
+            const form = new FormData();
+            Object.entries(fields).forEach(([field, value]) => {
+              form.append(field, value);
+            });
+            form.append("file", getValues("rarFile")[0]);
+
+            let urlpure = url.match(/(?<=https:\/\/)[\s\S]*/)[0];
+
+            const request = new Request(`https://${fields.bucket}.${urlpure}`, {
+              method: "POST",
+              body: form,
+            });
+
+            try {
+              const fetchresponse = await fetch(request);
+              enqueueSnackbar(`design update successfully`, {
+                variant: "success",
+                preventDuplicate: true,
+              });
+            } catch (error) {
+              enqueueSnackbar(`${error.message}`, {
+                variant: "error",
+                preventDuplicate: true,
+              });
+            }
+          } else {
+            enqueueSnackbar(`design update successfully`, {
+              variant: "success",
+              preventDuplicate: true,
+            });
+          }
+
+          // setTimeout(() => {
+          //   window.location.reload();
+          // }, 2000);
+          console.log("it must be reload");
+        } else if (data.status === 409 || data.statusCode === 409) {
           enqueueSnackbar(`name is in database`, {
             variant: "error",
             preventDuplicate: true,
           });
-        } else if (data.status === 400) {
+        } else if (data.status === 400 || data.statusCode === 400) {
           enqueueSnackbar(`bad request`, {
             variant: "error",
             preventDuplicate: true,
@@ -154,7 +200,7 @@ const Product = () => {
     }
   );
 
-  const { data, isLoading, isFetching, isError, error } = design;
+  const { data, isLoading, isError, error } = design;
   const [currentImage, setCurrentImage] = useState(0);
   const [isViewerOpen, setIsViewerOpen] = useState(false);
 
@@ -175,13 +221,13 @@ const Product = () => {
     }
     let formData = new FormData();
     for (const name in data) {
-      if (name === "images" || name === "rarFile") {
+      if (name === "images") {
         for (let i = 0; i < data[name].length; i++) {
           formData.append(name, data[name][i]);
         }
       } else if (name === "category") {
         formData.append(name, data[name]["value"]);
-      } else {
+      } else if (name !== "rarFile") {
         formData.append(name, data[name]);
       }
     }
@@ -226,9 +272,7 @@ const Product = () => {
                 <Select
                   {...field}
                   value={value}
-                  defaultValue={() => {
-                    return selectOptionsDesign[i];
-                  }}
+                  defaultValue={selectOptionsDesign[i]}
                   onChange={onChange}
                   placeholder="Categories"
                   options={selectOptionsDesign}
@@ -248,8 +292,8 @@ const Product = () => {
           <ReactLoading
             type={"bars"}
             color={"gray"}
-            height={"30%"}
-            width={"20%"}
+            height={"fit-content"}
+            width={"200px"}
           />
         </div>
       ) : isError ? (
@@ -305,7 +349,11 @@ const Product = () => {
                       <div className="submit">
                         <input
                           type="submit"
-                          value="update"
+                          value={
+                            updateDesignFetch.isLoading
+                              ? "loading..."
+                              : "update"
+                          }
                           className="submit"
                         />
                         <button

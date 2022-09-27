@@ -23,7 +23,7 @@ const ProtectedRoute = ({ children }) => {
             )
           ) : (
             <>
-              {console.log("we are in 2")}
+              {/* {console.log("we are in 2")} */}
               <Login />
             </>
           )
@@ -39,7 +39,7 @@ const ProtectedRoute = ({ children }) => {
         )
       ) : (
         <>
-          {console.log("we are in 4")}
+          {/* {console.log("we are in 4")} */}
           <Login />
         </>
       )}

@@ -1,10 +1,9 @@
 import { useSnackbar } from "notistack";
 import React from "react";
-import { useContext } from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
-import { AppContext } from "../../Services/AppService";
 import Form from "../Form/Form";
 
 const fields = [
@@ -52,53 +51,98 @@ const fields = [
 ];
 
 const UploadDesign = () => {
-  const { errorUI } = useContext(AppContext);
+  const [rarFile, setRarFile] = useState();
   const {
     control,
     register,
     handleSubmit,
-    watch,
-    reset,
+
     formState: { errors },
   } = useForm();
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const uploadDesignFetch = useMutation(
     async (data) => {
-      return await fetch(
-        `http://${process.env.REACT_APP_NETWORKIP}:3000/designs/upload`,
+      const response = await fetch(
+        `http://${process.env.REACT_APP_NETWORKIP}/designs/upload`,
         {
           method: "POST",
           credentials: "include",
           body: data,
         }
       );
+      return response.json();
     },
     {
-      onSuccess: (data) => {
-        console.log(data);
-        if (data.status === 201) {
-          enqueueSnackbar("success", {
-            variant: "success",
-            preventDuplicate: true,
+      onSuccess: async (data) => {
+        if (
+          data.status === 201 ||
+          data.statusCode === 201 ||
+          data.PresignedPost
+        ) {
+          enqueueSnackbar(
+            "upload start. please don't refresh page till success",
+            {
+              variant: "info",
+              preventDuplicate: true,
+            }
+          );
+
+          const { url, fields } = data.PresignedPost;
+
+          const form = new FormData();
+          Object.entries(fields).forEach(([field, value]) => {
+            form.append(field, value);
           });
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
-        } else if (data.status === 409) {
+          form.append("file", rarFile);
+
+          let urlpure = url.match(/(?<=https:\/\/)[\s\S]*/)[0];
+
+          const request = new Request(`https://${fields.bucket}.${urlpure}`, {
+            method: "POST",
+            body: form,
+          });
+
+          try {
+            const fetchresponse = await fetch(request);
+            enqueueSnackbar(`design uploaded successfully`, {
+              variant: "success",
+              preventDuplicate: true,
+            });
+          } catch (error) {
+            enqueueSnackbar(`${error.message}`, {
+              variant: "error",
+              preventDuplicate: true,
+            });
+          }
+
+          // setTimeout(() => {
+          //   window.location.reload();
+          // }, 2000);
+          console.log("it must be reload");
+        } else if (data.status === 409 || data.statusCode === 409) {
           enqueueSnackbar(`name is in database`, {
             variant: "error",
             preventDuplicate: true,
           });
-        } else if (data.status === 403) {
+          console.log(
+            data.statusCode,
+            "we must see snackbar of 'name is in database'"
+          );
+        } else if (data.status === 403 || data.statusCode === 403) {
           enqueueSnackbar("Your session is expired! please login again", {
             variant: "error",
             preventDuplicate: true,
           });
 
-          setTimeout(() => {
-            window.location.reload();
-          }, 2000);
+          console.log(
+            data.status,
+            "Your session is expired! please login again, there will be a reload"
+          );
+
+          // setTimeout(() => {
+          //   window.location.reload();
+          // }, 2000);
         }
       },
       onError: (error) => {
@@ -106,9 +150,13 @@ const UploadDesign = () => {
           variant: "error",
           preventDuplicate: true,
         });
-        setTimeout(() => {
-          window.location.reload();
-        }, 2000);
+
+        console.log(error);
+
+        console.log("here is a reload");
+        // setTimeout(() => {
+        //   window.location.reload();
+        // }, 2000);
       },
     }
   );
@@ -117,14 +165,18 @@ const UploadDesign = () => {
     try {
       let formData = new FormData();
       for (const name in data) {
-        if (name === "images" || name === "rarFile") {
+        // || name === "rarFile"
+        if (name === "images") {
           for (let i = 0; i < data[name].length; i++) {
             formData.append(name, data[name][i]);
           }
         } else if (name === "category") {
           formData.append(name, data[name]["value"]);
-        } else {
+        } else if (name !== "rarFile") {
           formData.append(name, data[name]);
+        }
+        if (name === "rarFile") {
+          setRarFile(data[name][0]);
         }
       }
       console.log("mutate start");

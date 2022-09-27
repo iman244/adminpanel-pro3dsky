@@ -9,10 +9,10 @@ const ImageLoading = ({ src, alt, className, onClick }) => {
   return (
     <>
       <ReactLoading
-        style={{ display: `${loading ? "block" : "none"}` }}
+        style={{ display: `${loading ? "block" : "none"}`, height: "220px" }}
         type={"blank"}
         color={"gray"}
-        height={"30%"}
+        height={"fit-content"}
         width={"100%"}
       />
 

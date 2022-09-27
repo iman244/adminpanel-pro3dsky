@@ -29,13 +29,10 @@ const DeleteUser = ({ user, setModal }) => {
 
   const DeleteUserFetch = useMutation(
     (id) => {
-      return fetch(
-        `http://${process.env.REACT_APP_NETWORKIP}:3000/users/${id}`,
-        {
-          method: "DELETE",
-          credentials: "include",
-        }
-      );
+      return fetch(`http://${process.env.REACT_APP_NETWORKIP}/users/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
     },
     {
       onSuccess: (data) => {

@@ -30,6 +30,27 @@ div.card {
   height: fit-content;
 }
 
+.textLink {
+  color: var(--basic);
+  cursor: pointer;
+}
+
+.textLink:hover {
+  color: var(--basicHover);
+}
+
+a.upload-new-design {
+  text-transform: capitalize;
+  border-radius: 5px;
+  padding: 10px 15px;
+  color: #fff;
+  background-color: #4182aa;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
 @media only screen and (max-width: 576px) {
   div.grid-container {
     grid-template-columns: var(--card-smallScreen-width);
@@ -41,6 +62,12 @@ div.card {
     grid-template-columns: var(--card-mediumScreen-width) var(
         --card-mediumScreen-width
       );
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  button.upload-new-design {
+    display: none;
   }
 }
 
