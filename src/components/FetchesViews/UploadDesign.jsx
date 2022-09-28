@@ -1,6 +1,5 @@
 import { useSnackbar } from "notistack";
 import React from "react";
-import { useState } from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
@@ -51,11 +50,11 @@ const fields = [
 ];
 
 const UploadDesign = () => {
-  const [rarFile, setRarFile] = useState();
   const {
     control,
     register,
     handleSubmit,
+    getValues,
 
     formState: { errors },
   } = useForm();
@@ -94,7 +93,7 @@ const UploadDesign = () => {
           Object.entries(fields).forEach(([field, value]) => {
             form.append(field, value);
           });
-          form.append("file", rarFile);
+          form.append("file", getValues("rarFile")[0]);
 
           let urlpure = url.match(/(?<=https:\/\/)[\s\S]*/)[0];
 
@@ -165,7 +164,6 @@ const UploadDesign = () => {
     try {
       let formData = new FormData();
       for (const name in data) {
-        // || name === "rarFile"
         if (name === "images") {
           for (let i = 0; i < data[name].length; i++) {
             formData.append(name, data[name][i]);
@@ -175,11 +173,7 @@ const UploadDesign = () => {
         } else if (name !== "rarFile") {
           formData.append(name, data[name]);
         }
-        if (name === "rarFile") {
-          setRarFile(data[name][0]);
-        }
       }
-      console.log("mutate start");
       uploadDesignFetch.mutate(formData);
     } catch (error) {
       console.dir(error);
