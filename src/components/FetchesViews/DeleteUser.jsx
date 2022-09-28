@@ -28,11 +28,14 @@ const DeleteUser = ({ user, setModal }) => {
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const DeleteUserFetch = useMutation(
-    (id) => {
-      return fetch(`http://${process.env.REACT_APP_NETWORKIP}/users/${id}`, {
-        method: "DELETE",
-        credentials: "include",
-      });
+    async (id) => {
+      return await fetch(
+        `http://${process.env.REACT_APP_NETWORKIP}/users/${id}`,
+        {
+          method: "DELETE",
+          credentials: "include",
+        }
+      );
     },
     {
       onSuccess: (data) => {

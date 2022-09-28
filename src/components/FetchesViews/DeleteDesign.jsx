@@ -22,8 +22,8 @@ const DeleteDesign = ({ design, setModal }) => {
     formState: { errors },
   } = useForm();
 
-  const DeleteDesignFetch = useMutation((id) => {
-    return fetch(
+  const DeleteDesignFetch = useMutation(async (id) => {
+    return await fetch(
       `http://${process.env.REACT_APP_NETWORKIP}/designs/delete/${id}`,
       {
         method: "DELETE",
