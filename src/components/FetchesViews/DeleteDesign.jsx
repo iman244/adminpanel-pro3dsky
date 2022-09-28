@@ -23,13 +23,13 @@ const DeleteDesign = ({ design, setModal }) => {
   } = useForm();
 
   const DeleteDesignFetch = useMutation(async (id) => {
-    return await fetch(
-      `http://${process.env.REACT_APP_NETWORKIP}/designs/delete/${id}`,
-      {
-        method: "DELETE",
-        credentials: "include",
-      }
-    );
+    const url = `http://${process.env.REACT_APP_NETWORKIP}/designs/delete/${id}`;
+    console.log(url);
+    console.log(process.env.REACT_APP_NETWORKIP);
+    return await fetch(url, {
+      method: "DELETE",
+      credentials: "include",
+    });
   });
 
   const onSubmit = async (data) => {
