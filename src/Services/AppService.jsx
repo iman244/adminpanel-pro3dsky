@@ -44,10 +44,11 @@ const AppService = ({ children }) => {
     }, 2000);
   };
 
-  const UserLog = (type, message) => {
+  const UserLog = (type, message, autoHideDuration = 3000) => {
     enqueueSnackbar(message, {
       variant: type,
       preventDuplicate: true,
+      autoHideDuration,
     });
   };
 

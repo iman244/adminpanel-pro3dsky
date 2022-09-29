@@ -18,6 +18,7 @@ import DownloadButton from "../../components/Buttons/DownloadButton";
 import { useContext } from "react";
 import { AppContext } from "../../Services/AppService";
 import ImageLoading from "../../components/ImageLoading";
+import axios from "axios";
 
 const fields = [
   {
@@ -102,6 +103,7 @@ const Product = () => {
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [modalOpenDelete, setModalOpenDelete] = useState(false);
   const [productUpdated, setProductUpdated] = useState(1);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const [i, setI] = useState();
 
   const {
@@ -166,17 +168,19 @@ const Product = () => {
 
             let urlpure = url.match(/(?<=https:\/\/)[\s\S]*/)[0];
 
-            const request = new Request(`https://${fields.bucket}.${urlpure}`, {
-              method: "POST",
-              body: form,
-            });
-
             try {
-              await fetch(request);
-              enqueueSnackbar(`design update successfully`, {
-                variant: "success",
-                preventDuplicate: true,
+              await axios.post(`https://${fields.bucket}.${urlpure}`, form, {
+                headers: { "Content-Type": "multipart/form-data" },
+                onUploadProgress: function (progressEvent) {
+                  setUploadProgress(
+                    Math.round(
+                      (progressEvent.loaded * 100) / progressEvent.total
+                    )
+                  );
+                },
               });
+              setUploadProgress(0);
+              UserLog("success", "design update successfully");
             } catch (error) {
               enqueueSnackbar(`${error.message}`, {
                 variant: "error",
@@ -345,7 +349,7 @@ const Product = () => {
                           type="submit"
                           value={
                             updateDesignFetch.isLoading
-                              ? "loading..."
+                              ? `${uploadProgress}%`
                               : "update"
                           }
                           className="submit"

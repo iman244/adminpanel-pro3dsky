@@ -14,12 +14,6 @@ import DesignService from "./Services/DesignService";
 import Product from "./views/Product/Product";
 import AppService from "./Services/AppService";
 
-/*
-
-page 404
-
-*/
-
 const queryClient = new QueryClient();
 
 function App() {

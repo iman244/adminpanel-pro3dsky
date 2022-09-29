@@ -18,7 +18,7 @@ const selectStyle = {
 const Form = ({
   use,
   isLoading,
-  LoadingComponent,
+  LoadingTXT,
   submitButton,
   fields,
   pattern,
@@ -99,7 +99,9 @@ const Form = ({
       <div className="submit">
         <input
           type="submit"
-          value={isLoading ? "loading..." : submitButton}
+          value={
+            isLoading ? (LoadingTXT ? LoadingTXT : "loading...") : submitButton
+          }
           className="submit"
         />
       </div>

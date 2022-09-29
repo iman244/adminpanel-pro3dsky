@@ -1,8 +1,11 @@
-import { useSnackbar } from "notistack";
+import axios from "axios";
 import React from "react";
+import { useContext } from "react";
+import { useState } from "react";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
+import { AppContext } from "../../Services/AppService";
 import Form from "../Form/Form";
 
 const fields = [
@@ -50,6 +53,8 @@ const fields = [
 ];
 
 const UploadDesign = () => {
+  const { UserLog } = useContext(AppContext);
+  const [uploadProgress, setUploadProgress] = useState(0);
   const {
     control,
     register,
@@ -58,7 +63,6 @@ const UploadDesign = () => {
 
     formState: { errors },
   } = useForm();
-  const { enqueueSnackbar } = useSnackbar();
 
   const uploadDesignFetch = useMutation(
     async (data) => {
@@ -79,12 +83,9 @@ const UploadDesign = () => {
           data.statusCode === 201 ||
           data.PresignedPost
         ) {
-          enqueueSnackbar(
-            "upload start. please don't refresh page till success",
-            {
-              variant: "info",
-              preventDuplicate: true,
-            }
+          UserLog(
+            "info",
+            "upload start. please don't refresh page till success"
           );
 
           const { url, fields } = data.PresignedPost;
@@ -97,52 +98,34 @@ const UploadDesign = () => {
 
           let urlpure = url.match(/(?<=https:\/\/)[\s\S]*/)[0];
 
-          const request = new Request(`https://${fields.bucket}.${urlpure}`, {
-            method: "POST",
-            body: form,
-          });
-
           try {
-            await fetch(request);
-            enqueueSnackbar(`design uploaded successfully`, {
-              variant: "success",
-              preventDuplicate: true,
+            await axios.post(`https://${fields.bucket}.${urlpure}`, form, {
+              headers: { "Content-Type": "multipart/form-data" },
+              onUploadProgress: function (progressEvent) {
+                setUploadProgress(
+                  Math.round((progressEvent.loaded * 100) / progressEvent.total)
+                );
+              },
             });
+            setUploadProgress(0);
+            UserLog("success", "design uploaded successfully");
           } catch (error) {
-            enqueueSnackbar(`${error.message}`, {
-              variant: "error",
-              preventDuplicate: true,
-            });
-            enqueueSnackbar(
-              `document was created, please upload your rar in design page`,
-              {
-                variant: "error",
-                preventDuplicate: true,
-              }
+            UserLog("error", `${error.message}`);
+            UserLog(
+              "warning",
+              "document was created, but upload was unsuccessful! please upload your rar in design page",
+              10000
             );
           }
         } else if (data.status === 409 || data.statusCode === 409) {
-          enqueueSnackbar(`name is in database`, {
-            variant: "error",
-            preventDuplicate: true,
-          });
-          console.log(
-            data.statusCode,
-            "we must see snackbar of 'name is in database'"
-          );
+          UserLog("error", "name is in database");
         } else if (data.status === 403 || data.statusCode === 403) {
-          enqueueSnackbar("Your session is expired! please login again", {
-            variant: "error",
-            preventDuplicate: true,
-          });
+          UserLog("error", "Your session is expired! please login again");
         }
       },
       onError: (error) => {
-        enqueueSnackbar(error.message, {
-          variant: "error",
-          preventDuplicate: true,
-        });
         console.log(error);
+        UserLog("error", `${error.message}`);
       },
     }
   );
@@ -164,10 +147,7 @@ const UploadDesign = () => {
       uploadDesignFetch.mutate(formData);
     } catch (error) {
       console.dir(error);
-      enqueueSnackbar("please select a category", {
-        variant: "error",
-        preventDuplicate: true,
-      });
+      UserLog("error", "please select a category");
     }
   };
 
@@ -182,6 +162,7 @@ const UploadDesign = () => {
         use={{ control, register, handleSubmit, errors, onSubmit }}
         submitButton="upload"
         isLoading={uploadDesignFetch.isLoading}
+        LoadingTXT={`${uploadProgress}%`}
         fields={fields}
       />
     </div>
