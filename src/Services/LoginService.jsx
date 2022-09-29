@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { createContext, useEffect } from "react";
 import { useMutation } from "react-query";
 

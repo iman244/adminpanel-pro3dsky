@@ -4,7 +4,7 @@ import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Form from "../../components/Form/Form";
 import { useForm } from "react-hook-form";
-import { LoginServiceContext } from "../../context/LoginService";
+import { LoginServiceContext } from "../../Services/LoginService";
 
 const FormFields = [
   {

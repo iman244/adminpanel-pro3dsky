@@ -1,7 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Form from "../Form/Form";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
+import { useSnackbar } from "notistack";
+import { useContext } from "react";
+import { AppContext } from "../../Services/AppService";
+import { useNavigate } from "react-router-dom";
 
 const fields = [
   {
@@ -14,23 +18,33 @@ const fields = [
   },
 ];
 
-const DeleteDesign = ({ design, setModal }) => {
+const DeleteDesign = ({ design }) => {
+  const { UserLog } = useContext(AppContext);
+  let navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
 
-  const DeleteDesignFetch = useMutation(async (id) => {
-    const url = `http://${process.env.REACT_APP_NETWORKIP}/designs/delete/${id}`;
-    console.log(url);
-    console.log(process.env.REACT_APP_NETWORKIP);
-    return await fetch(url, {
-      method: "DELETE",
-      credentials: "include",
-    });
-  });
+  const DeleteDesignFetch = useMutation(
+    async (id) => {
+      const url = `http://${process.env.REACT_APP_NETWORKIP}/designs/delete/${id}`;
+      return await fetch(url, {
+        method: "DELETE",
+        credentials: "include",
+      });
+    },
+    {
+      onSuccess: (data) => {
+        if (data.status === 200 || data.statusCode === 200) {
+          UserLog("success", "success");
+          navigate("/design");
+        }
+      },
+    }
+  );
 
   const onSubmit = async (data) => {
     if (data.name === design.name) {
@@ -39,13 +53,6 @@ const DeleteDesign = ({ design, setModal }) => {
       console.error("error in DeleteUser.jsx");
     }
   };
-
-  useEffect(() => {
-    DeleteDesignFetch.isSuccess && setModal(false);
-    if (DeleteDesignFetch.isSuccess) {
-      window.location.pathname = "/design";
-    }
-  });
 
   return (
     <div className="fetch-container delete-design">

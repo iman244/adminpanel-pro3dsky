@@ -5,7 +5,6 @@ import { useParams } from "react-router-dom";
 import MiniImage from "./MiniImage";
 import ReactSimpleImageViewer from "react-simple-image-viewer";
 import { useMutation, useQuery } from "react-query";
-import { useEffect } from "react";
 import { Controller, useForm } from "react-hook-form";
 import Select from "react-select";
 import { selectOptionsDesign } from "../../components/Form/selectOptionsDesign";
@@ -16,7 +15,9 @@ import Error403 from "../../components/Error403/Error403";
 import Modal from "../Users/Modal";
 import DeleteDesign from "../../components/FetchesViews/DeleteDesign";
 import DownloadButton from "../../components/Buttons/DownloadButton";
-import "./uploadFiles.css";
+import { useContext } from "react";
+import { AppContext } from "../../Services/AppService";
+import ImageLoading from "../../components/ImageLoading";
 
 const fields = [
   {
@@ -96,8 +97,11 @@ function findIinSelectOptionsDesign(data) {
 
 const Product = () => {
   let params = useParams();
-  const [rarFile, setRarFile] = useState();
+  const { UserLog } = useContext(AppContext);
+  const [currentImage, setCurrentImage] = useState(0);
+  const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [modalOpenDelete, setModalOpenDelete] = useState(false);
+  const [productUpdated, setProductUpdated] = useState(1);
   const [i, setI] = useState();
 
   const {
@@ -109,16 +113,21 @@ const Product = () => {
     formState: { errors },
   } = useForm();
 
-  const design = useQuery(["design", i], () => getDesign(params.id), {
-    onSuccess: (data) => {
-      data.name && setValue("name", data.name);
-      data.isPremium && setValue("isPremium", data.isPremium);
-      setI(findIinSelectOptionsDesign(data));
-    },
-  });
+  const design = useQuery(
+    ["design", params.id, productUpdated],
+    () => getDesign(params.id),
+    {
+      onSuccess: (data) => {
+        data.name && setValue("name", data.name);
+        data.isPremium && setValue("isPremium", data.isPremium);
+        setI(findIinSelectOptionsDesign(data));
+      },
+    }
+  );
+  const { data, isLoading, isError, error } = design;
   const file = useQuery("file", () => getFile(params.id), {});
 
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
   const updateDesignFetch = useMutation(
     async (data) => {
       const response = await fetch(
@@ -163,7 +172,7 @@ const Product = () => {
             });
 
             try {
-              const fetchresponse = await fetch(request);
+              await fetch(request);
               enqueueSnackbar(`design update successfully`, {
                 variant: "success",
                 preventDuplicate: true,
@@ -175,34 +184,21 @@ const Product = () => {
               });
             }
           } else {
-            enqueueSnackbar(`design update successfully`, {
-              variant: "success",
-              preventDuplicate: true,
-            });
+            UserLog("success", "design update successfully");
           }
 
-          // setTimeout(() => {
-          //   window.location.reload();
-          // }, 2000);
-          console.log("it must be reload");
+          setProductUpdated((p) => p + 1);
+          if (getValues("images")[0]) {
+            setTimeout(() => window.location.reload(), 1000);
+          }
         } else if (data.status === 409 || data.statusCode === 409) {
-          enqueueSnackbar(`name is in database`, {
-            variant: "error",
-            preventDuplicate: true,
-          });
+          UserLog("error", "name is in database");
         } else if (data.status === 400 || data.statusCode === 400) {
-          enqueueSnackbar(`bad request`, {
-            variant: "error",
-            preventDuplicate: true,
-          });
+          UserLog("error", "bad request");
         }
       },
     }
   );
-
-  const { data, isLoading, isError, error } = design;
-  const [currentImage, setCurrentImage] = useState(0);
-  const [isViewerOpen, setIsViewerOpen] = useState(false);
 
   const openImageViewer = useCallback((index) => {
     setCurrentImage(index);
@@ -234,8 +230,6 @@ const Product = () => {
     updateDesignFetch.mutate(formData);
   };
 
-  useEffect(() => {});
-
   const input = (field) => {
     switch (field.type) {
       default:
@@ -263,6 +257,7 @@ const Product = () => {
           />
         );
       case "select":
+        const defaultValue = selectOptionsDesign[i];
         return (
           <Controller
             name={field.name}
@@ -272,7 +267,7 @@ const Product = () => {
                 <Select
                   {...field}
                   value={value}
-                  defaultValue={selectOptionsDesign[i]}
+                  defaultValue={defaultValue}
                   onChange={onChange}
                   placeholder="Categories"
                   options={selectOptionsDesign}
@@ -309,13 +304,12 @@ const Product = () => {
               <div className="product container">
                 <div className="imagePdescDownload">
                   <div className="image">
-                    {
-                      <img
-                        className="image-index"
-                        src={`https://${process.env.REACT_APP_BUCKETS3_NAME}.${process.env.REACT_APP_ENDPOINT_URL}/${data.keyList[0]}`}
-                        alt="design"
-                      />
-                    }
+                    <ImageLoading
+                      height="100%"
+                      className="image-index"
+                      src={`https://${process.env.REACT_APP_BUCKETS3_NAME}.${process.env.REACT_APP_ENDPOINT_URL}/${data.keyList[0]}`}
+                      alt="design"
+                    />
                   </div>
                   <div className="descAndDownload">
                     <div className="d-wrapper">
@@ -366,7 +360,6 @@ const Product = () => {
                       </div>
                       <DownloadButton
                         buttonStyle={{
-                          borderRadius: "3px",
                           padding: "10px 20px",
                         }}
                         downloadLink={
@@ -409,9 +402,7 @@ const Product = () => {
           <Modal
             modalOpen={modalOpenDelete}
             setModalOpen={setModalOpenDelete}
-            content={
-              <DeleteDesign design={data} setModal={setModalOpenDelete} />
-            }
+            content={<DeleteDesign design={data} />}
           />
         </>
       )}

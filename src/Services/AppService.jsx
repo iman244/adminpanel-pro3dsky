@@ -1,11 +1,19 @@
 import { useSnackbar } from "notistack";
 import React, { createContext } from "react";
+import { useMutation } from "react-query";
 
 export const AppContext = createContext();
 
 const AppService = ({ children }) => {
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const logOut = useMutation(async () => {
+    const response = await fetch(
+      `http://${process.env.REACT_APP_NETWORKIP}/auth/logout`,
+      { method: "GET", credentials: "include" }
+    );
+    return response.json();
+  });
 
+  const { enqueueSnackbar } = useSnackbar();
   const errorUI = (
     type,
     message = "if you see this, then you need provide message as a second variable"
@@ -30,13 +38,23 @@ const AppService = ({ children }) => {
         });
         break;
     }
-    console.log("now window.location.reload will be run, type is:", type);
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 2000);
+    // console.log("now window.location.reload will be run, type is:", type);
+    setTimeout(() => {
+      window.location.reload();
+    }, 2000);
   };
+
+  const UserLog = (type, message) => {
+    enqueueSnackbar(message, {
+      variant: type,
+      preventDuplicate: true,
+    });
+  };
+
   return (
-    <AppContext.Provider value={{ errorUI }}>{children}</AppContext.Provider>
+    <AppContext.Provider value={{ errorUI, UserLog, logOut }}>
+      {children}
+    </AppContext.Provider>
   );
 };
 

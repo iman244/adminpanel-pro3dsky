@@ -7,7 +7,7 @@ a.download {
 
   background-color: var(--cardDownload);
   border: 2px solid var(--basic);
-  border-radius: 8px;
+  border-radius: 3px;
 
   cursor: pointer;
   padding: 0.3rem 0.6rem;

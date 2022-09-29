@@ -58,7 +58,7 @@ const UploadDesign = () => {
 
     formState: { errors },
   } = useForm();
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
+  const { enqueueSnackbar } = useSnackbar();
 
   const uploadDesignFetch = useMutation(
     async (data) => {
@@ -103,7 +103,7 @@ const UploadDesign = () => {
           });
 
           try {
-            const fetchresponse = await fetch(request);
+            await fetch(request);
             enqueueSnackbar(`design uploaded successfully`, {
               variant: "success",
               preventDuplicate: true,
@@ -113,12 +113,14 @@ const UploadDesign = () => {
               variant: "error",
               preventDuplicate: true,
             });
+            enqueueSnackbar(
+              `document was created, please upload your rar in design page`,
+              {
+                variant: "error",
+                preventDuplicate: true,
+              }
+            );
           }
-
-          // setTimeout(() => {
-          //   window.location.reload();
-          // }, 2000);
-          console.log("it must be reload");
         } else if (data.status === 409 || data.statusCode === 409) {
           enqueueSnackbar(`name is in database`, {
             variant: "error",
@@ -133,15 +135,6 @@ const UploadDesign = () => {
             variant: "error",
             preventDuplicate: true,
           });
-
-          console.log(
-            data.status,
-            "Your session is expired! please login again, there will be a reload"
-          );
-
-          // setTimeout(() => {
-          //   window.location.reload();
-          // }, 2000);
         }
       },
       onError: (error) => {
@@ -149,13 +142,7 @@ const UploadDesign = () => {
           variant: "error",
           preventDuplicate: true,
         });
-
         console.log(error);
-
-        console.log("here is a reload");
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 2000);
       },
     }
   );

@@ -91,6 +91,22 @@ div.updatePage-buttons {
   align-items: center;
 }
 
+div.submit button {
+  text-transform: capitalize;
+  color: #fff !important;
+  background-color: #4182aa;
+  border: none;
+  border-radius: 4px;
+  font-weight: 500;
+  font-size: small;
+  line-height: normal;
+  cursor: pointer;
+  box-sizing: border-box;
+  padding: 6px 20px !important;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
 @media only screen and (min-width: 768px) {
   div.product.page div.imagePdescDownload {
     flex-direction: row;

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { Outlet } from "react-router-dom";
-import { LoginServiceContext } from "../context/LoginService";
+import { LoginServiceContext } from "./LoginService";
 import ReactLoading from "react-loading";
 import "./reactLoadingCss.css";
 import Login from "../views/Login/Login";

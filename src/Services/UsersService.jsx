@@ -14,9 +14,10 @@ const getAllUsersFetch = async (keyword = "", page = 1, limit = 1) => {
 const UsersService = ({ children }) => {
   const [page, setPage] = useState(1);
   const [keyword, setKeyword] = useState("");
+  const [usersChanged, setUsersChanged] = useState(1);
   const itemsPerPage = 16;
   const { isLoading, isError, status, error, data } = useQuery(
-    ["users", page, keyword],
+    ["users", page, keyword, usersChanged],
     () => getAllUsersFetch(keyword, page, itemsPerPage)
   );
 
@@ -38,6 +39,7 @@ const UsersService = ({ children }) => {
         usersCount,
         keyword,
         setKeyword,
+        setUsersChanged,
       }}
     >
       {children}

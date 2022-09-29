@@ -24,7 +24,6 @@ const Form = ({
   pattern,
 }) => {
   const { control, register, handleSubmit, errors, onSubmit } = use;
-  const [modalUploadFile, setModalUploadFile] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
   const input = (field) => {
     switch (field.type) {

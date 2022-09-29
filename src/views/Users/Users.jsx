@@ -4,7 +4,7 @@ import CreateUser from "../../components/FetchesViews/CreateUser";
 import UserCard from "./UserCard/UserCard";
 import "./users.css";
 import ReactPaginate from "react-paginate";
-import { UsersContext } from "./UsersService";
+import { UsersContext } from "../../Services/UsersService";
 import Search from "../../components/Search/Search";
 import LoaderPaginate from "./LoaderPaginate";
 import ReactLoading from "react-loading";
@@ -30,7 +30,6 @@ const Users = () => {
     setPage,
     itemsPerPage,
     usersCount,
-    page,
     keyword,
     setKeyword,
   } = useContext(UsersContext);

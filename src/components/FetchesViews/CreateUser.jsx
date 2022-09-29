@@ -1,6 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
+import { AppContext } from "../../Services/AppService";
+import { UsersContext } from "../../Services/UsersService";
 import Form from "../Form/Form";
 const axios = require("axios").default;
 
@@ -30,29 +32,39 @@ const fields = [
 ];
 
 const CreateUser = ({ setModal }) => {
+  const { UserLog } = useContext(AppContext);
+  const { setUsersChanged } = useContext(UsersContext);
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
-  const createUserFetch = useMutation((data) => {
-    return axios.post(
-      `http://${process.env.REACT_APP_NETWORKIP}/users/register`,
-      data,
-      {
-        withCredentials: true,
-      }
-    );
-  });
+  const createUserFetch = useMutation(
+    (data) => {
+      return axios.post(
+        `http://${process.env.REACT_APP_NETWORKIP}/users/register`,
+        data,
+        {
+          withCredentials: true,
+        }
+      );
+    },
+    {
+      onSuccess: (data) => {
+        if (data.status === 201 || data.statusCode === 201) {
+          UserLog("success", "user created successfully");
+          setUsersChanged((p) => p + 1);
+          setModal(false);
+        }
+      },
+    }
+  );
 
   const onSubmit = (data) => {
     createUserFetch.mutate(data);
   };
 
-  useEffect(() => {
-    createUserFetch.isSuccess && setModal(false);
-  });
+  useEffect(() => {});
 
   return (
     <div className="fetch-container create-user">

@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import axios from "axios";
+import React, { useContext, useEffect } from "react";
 
 import { useForm } from "react-hook-form";
 import Form from "../Form/Form";
 import { useMutation } from "react-query";
-import { useSnackbar } from "notistack";
+import { AppContext } from "../../Services/AppService";
+import { UsersContext } from "../../Services/UsersService";
 
 const fields = [
   {
@@ -18,14 +18,13 @@ const fields = [
 ];
 
 const DeleteUser = ({ user, setModal }) => {
+  const { UserLog } = useContext(AppContext);
+  const { setUsersChanged } = useContext(UsersContext);
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm();
-
-  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const DeleteUserFetch = useMutation(
     async (id) => {
@@ -39,14 +38,9 @@ const DeleteUser = ({ user, setModal }) => {
     },
     {
       onSuccess: (data) => {
-        if (data.status === 200) {
-          enqueueSnackbar("success", {
-            variant: "success",
-            preventDuplicate: true,
-          });
-          setTimeout(function () {
-            window.location.reload();
-          }, 3000);
+        if (data.status === 200 || data.statusCode === 200) {
+          UserLog("success", "user deleted successfully");
+          setUsersChanged((p) => p + 1);
         }
       },
     }

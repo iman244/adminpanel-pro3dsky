@@ -9,7 +9,7 @@ import { AppContext } from "../../Services/AppService";
 const Page = ({ content }) => {
   const [viewPortSizeSmall, setViewPortSizeSmall] = useState(true);
   const [sidebarMenuShow, setSidebarMenuShow] = useState(false);
-  const { errorUI } = useContext(AppContext);
+  const { errorUI, logOut } = useContext(AppContext);
 
   const handleView = () => {
     if (window.innerWidth <= 576) {
@@ -21,9 +21,7 @@ const Page = ({ content }) => {
   window.addEventListener("resize", handleView);
 
   const handleSignOut = () => {
-    document.cookie =
-      "access_token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-    errorUI("logout");
+    logOut.mutate();
   };
 
   useEffect(() => {

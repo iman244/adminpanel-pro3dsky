@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ImageViewer from "react-simple-image-viewer";
 import DownloadButton from "../../../../components/Buttons/DownloadButton";
 import "./card.css";
-import ImageLoading from "./ImageLoading";
+import ImageLoading from "../../../../components/ImageLoading";
 
 const CardImg = ({ id, src, desc }) => {
   const [currentImage, setCurrentImage] = useState(0);
@@ -24,6 +24,7 @@ const CardImg = ({ id, src, desc }) => {
       <Link to={`${id}`}>
         <div className="imgCard">
           <ImageLoading
+            height="220px"
             src={`https://${process.env.REACT_APP_BUCKETS3_NAME}.${process.env.REACT_APP_ENDPOINT_URL}/${src[0]}`}
             alt=""
             className="imgCard"
@@ -34,6 +35,7 @@ const CardImg = ({ id, src, desc }) => {
                 {src.map((imgSrc, index) => {
                   return (
                     <img
+                      key={imgSrc}
                       src={`https://${process.env.REACT_APP_BUCKETS3_NAME}.${process.env.REACT_APP_ENDPOINT_URL}/${imgSrc}`}
                       alt="product"
                       className="multiImg"
@@ -55,9 +57,7 @@ const CardImg = ({ id, src, desc }) => {
         </div>
       </Link>
       <div className="download">
-        <Link to={`${id}`}>
-          <DownloadButton />
-        </Link>
+        <DownloadButton to={`${id}`} />
       </div>
       {isViewerOpen && (
         <ImageViewer

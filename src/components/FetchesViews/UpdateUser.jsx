@@ -1,7 +1,10 @@
 import axios from "axios";
 import React, { useEffect } from "react";
+import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
+import { AppContext } from "../../Services/AppService";
+import { UsersContext } from "../../Services/UsersService";
 import Form from "../Form/Form";
 
 const fields = [
@@ -30,23 +33,34 @@ const fields = [
 ];
 
 const UpdateUser = ({ user, setModal }) => {
+  const { UserLog } = useContext(AppContext);
+  const { setUsersChanged } = useContext(UsersContext);
   const {
     register,
     handleSubmit,
-    watch,
     setValue,
     formState: { errors },
   } = useForm();
 
-  const UpdateUserFetch = useMutation((data) => {
-    return axios.put(
-      `http://${process.env.REACT_APP_NETWORKIP}/users/${user._id}`,
-      data,
-      {
-        withCredentials: true,
-      }
-    );
-  });
+  const UpdateUserFetch = useMutation(
+    (data) => {
+      return axios.put(
+        `http://${process.env.REACT_APP_NETWORKIP}/users/${user._id}`,
+        data,
+        {
+          withCredentials: true,
+        }
+      );
+    },
+    {
+      onSuccess: (data) => {
+        if (data.status === 200 || data.statusCode === 200) {
+          UserLog("success", "user updated successfully");
+          setUsersChanged((p) => p + 1);
+        }
+      },
+    }
+  );
 
   const onSubmit = (data) => {
     UpdateUserFetch.mutate(data);
@@ -56,8 +70,6 @@ const UpdateUser = ({ user, setModal }) => {
     setValue("username", user.username);
     setValue("password", user.password);
     setValue("isAdmin", user.isAdmin);
-    UpdateUserFetch.isSuccess && setModal(false);
-    UpdateUserFetch.isSuccess && window.location.reload();
   }, []);
 
   return (
