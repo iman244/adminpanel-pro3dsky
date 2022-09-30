@@ -54,7 +54,7 @@ const fields = [
 
 const UploadDesign = () => {
   const { UserLog } = useContext(AppContext);
-  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadProgress, setUploadProgress] = useState("please wait");
   const {
     control,
     register,
@@ -103,11 +103,15 @@ const UploadDesign = () => {
               headers: { "Content-Type": "multipart/form-data" },
               onUploadProgress: function (progressEvent) {
                 setUploadProgress(
-                  Math.round((progressEvent.loaded * 100) / progressEvent.total)
+                  Math.round(
+                    `${Math.round(
+                      (progressEvent.loaded * 100) / progressEvent.total
+                    )}%`
+                  )
                 );
               },
             });
-            setUploadProgress(0);
+            setUploadProgress("please wait");
             UserLog("success", "design uploaded successfully");
           } catch (error) {
             UserLog("error", `${error.message}`);
@@ -162,7 +166,7 @@ const UploadDesign = () => {
         use={{ control, register, handleSubmit, errors, onSubmit }}
         submitButton="upload"
         isLoading={uploadDesignFetch.isLoading}
-        LoadingTXT={`${uploadProgress}%`}
+        LoadingTXT={uploadProgress}
         fields={fields}
       />
     </div>

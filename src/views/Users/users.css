@@ -131,22 +131,9 @@ ul.container > li:hover > a.pagelink {
   }
 }
 
-@media only screen and (max-width: 768px) {
-  /* div.headers > h2 {
-        order: 
-        1;
-    }
-    div.headers > div.searchBar {
-        order: 3;
-    }
-    div.headers > button.create-user {
-        order: 2;
-    } */
-}
-
 @media only screen and (min-width: 992px) {
   div.users-grid {
-    grid-template-columns: 15vw 15vw 15vw 15vw;
+    grid-template-columns: 15vw 15vw 15vw 15vw 15vw;
   }
 
   div.headers.DesignToolbar {

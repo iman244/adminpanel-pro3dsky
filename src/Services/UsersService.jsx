@@ -15,7 +15,7 @@ const UsersService = ({ children }) => {
   const [page, setPage] = useState(1);
   const [keyword, setKeyword] = useState("");
   const [usersChanged, setUsersChanged] = useState(1);
-  const itemsPerPage = 16;
+  const itemsPerPage = 20;
   const { isLoading, isError, status, error, data } = useQuery(
     ["users", page, keyword, usersChanged],
     () => getAllUsersFetch(keyword, page, itemsPerPage)

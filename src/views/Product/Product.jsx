@@ -103,7 +103,7 @@ const Product = () => {
   const [isViewerOpen, setIsViewerOpen] = useState(false);
   const [modalOpenDelete, setModalOpenDelete] = useState(false);
   const [productUpdated, setProductUpdated] = useState(1);
-  const [uploadProgress, setUploadProgress] = useState(0);
+  const [uploadProgress, setUploadProgress] = useState("please wait");
   const [i, setI] = useState();
 
   const {
@@ -173,13 +173,13 @@ const Product = () => {
                 headers: { "Content-Type": "multipart/form-data" },
                 onUploadProgress: function (progressEvent) {
                   setUploadProgress(
-                    Math.round(
+                    `${Math.round(
                       (progressEvent.loaded * 100) / progressEvent.total
-                    )
+                    )}%`
                   );
                 },
               });
-              setUploadProgress(0);
+              setUploadProgress("please wait");
               UserLog("success", "design update successfully");
             } catch (error) {
               enqueueSnackbar(`${error.message}`, {
@@ -349,7 +349,7 @@ const Product = () => {
                           type="submit"
                           value={
                             updateDesignFetch.isLoading
-                              ? `${uploadProgress}%`
+                              ? uploadProgress
                               : "update"
                           }
                           className="submit"

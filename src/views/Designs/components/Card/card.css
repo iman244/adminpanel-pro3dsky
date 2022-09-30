@@ -21,6 +21,25 @@
   transition: all 0.4s;
 }
 
+.card div.badge {
+  position: absolute;
+  bottom: 0;
+  z-index: 1000;
+  width: fit-content;
+  padding: 5px 15px;
+  transition: all 0.4s;
+  background: rgba(255, 255, 255, 0.7);
+  border-radius: 0 5px 0 0;
+  text-transform: uppercase;
+}
+
+div.badge span.pro {
+  color: var(--basic);
+}
+div.badge span.free {
+  color: #379222;
+}
+
 .card div.imgCard:hover div.showHide {
   visibility: visible;
   opacity: 1;
