@@ -7,17 +7,13 @@ div.product.page {
 
 div.product.container {
   box-sizing: border-box;
-  width: calc((100vw - 150px) * 0.8);
   max-width: 700px;
   margin-top: 20px;
   padding: 20px;
   height: fit-content;
-  -webkit-box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.3);
-  box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
   gap: 20px;
-  background-color: rgb(251, 251, 251);
 }
 
 div.product.page div.imagePdescDownload {
@@ -49,6 +45,7 @@ div.product.page div.descAndDownload {
   gap: 20px;
   width: fit-content;
   max-width: 350px;
+  min-width: 130px;
 }
 
 div.desc {
@@ -71,6 +68,7 @@ span.d-label {
 span.d {
   flex: 1;
   text-overflow: ellipsis;
+  word-break: break-all;
 }
 
 div.product.page span.desc {
@@ -110,9 +108,21 @@ div.submit button {
   width: fit-content;
 }
 
+@media only screen and (min-width: 576px) {
+  div.product.container {
+    width: calc((100vw) * 0.8);
+    -webkit-box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.3);
+    box-shadow: 3px 3px 5px 1px rgba(0, 0, 0, 0.15);
+    background-color: rgb(251, 251, 251);
+  }
+}
+
 @media only screen and (min-width: 768px) {
   div.product.page div.imagePdescDownload {
     flex-direction: row;
+  }
+  div.product.container {
+    width: calc((100vw - 150px) * 0.8);
   }
 }
 
