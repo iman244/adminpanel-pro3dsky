@@ -5,7 +5,7 @@ export const LoginServiceContext = createContext();
 
 const LoginService = ({ children }) => {
   const LoginUserFetch = useMutation((data) => {
-    return fetch(`http://${process.env.REACT_APP_NETWORKIP}/auth/login`, {
+    return fetch(`${process.env.REACT_APP_NETWORKIP}/auth/login`, {
       method: "POST",
       credentials: "include",
       body: JSON.stringify(data),
@@ -16,7 +16,7 @@ const LoginService = ({ children }) => {
   });
 
   const sec = useMutation(async (data) => {
-    let response = await fetch(`http://${process.env.REACT_APP_NETWORKIP}`, {
+    let response = await fetch(`${process.env.REACT_APP_NETWORKIP}`, {
       method: "POST",
       credentials: "include",
       body: JSON.stringify(data),

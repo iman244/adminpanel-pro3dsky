@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { useEffect } from "react";
 import { Controller } from "react-hook-form";
 import Select from "react-select";
 import { selectOptionsDesign } from "./selectOptionsDesign";
@@ -75,7 +74,7 @@ const Form = ({
         );
     }
   };
-  useEffect(() => {});
+
   return (
     /* "handleSubmit" will validate your inputs before invoking "onSubmit" */
     <form className="apiForm" onSubmit={handleSubmit(onSubmit)}>

@@ -103,11 +103,9 @@ const UploadDesign = () => {
               headers: { "Content-Type": "multipart/form-data" },
               onUploadProgress: function (progressEvent) {
                 setUploadProgress(
-                  Math.round(
-                    `${Math.round(
-                      (progressEvent.loaded * 100) / progressEvent.total
-                    )}%`
-                  )
+                  `${Math.round(
+                    (progressEvent.loaded * 100) / progressEvent.total
+                  )}%`
                 );
               },
             });

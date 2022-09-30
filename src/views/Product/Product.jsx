@@ -68,7 +68,7 @@ const selectStyle = {
 
 const getDesign = async (id) => {
   const response = await fetch(
-    `http://${process.env.REACT_APP_NETWORKIP}/designs/${id}`,
+    `${process.env.REACT_APP_NETWORKIP}/designs/${id}`,
     {
       credentials: "include",
     }
@@ -79,7 +79,7 @@ const getDesign = async (id) => {
 
 const getFile = async (id) => {
   const response = await fetch(
-    `http://${process.env.REACT_APP_NETWORKIP}/file/${id}`,
+    `${process.env.REACT_APP_NETWORKIP}/file/${id}`,
     { method: "GET", credentials: "include" }
   );
 
@@ -133,7 +133,7 @@ const Product = () => {
   const updateDesignFetch = useMutation(
     async (data) => {
       const response = await fetch(
-        `http://${process.env.REACT_APP_NETWORKIP}/designs/update/${params.id}`,
+        `${process.env.REACT_APP_NETWORKIP}/designs/update/${params.id}`,
         {
           method: "PUT",
           credentials: "include",

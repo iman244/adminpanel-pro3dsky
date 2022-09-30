@@ -7,7 +7,7 @@ export const AppContext = createContext();
 const AppService = ({ children }) => {
   const logOut = useMutation(async () => {
     const response = await fetch(
-      `http://${process.env.REACT_APP_NETWORKIP}/auth/logout`,
+      `${process.env.REACT_APP_NETWORKIP}/auth/logout`,
       { method: "GET", credentials: "include" }
     );
     return response.json();

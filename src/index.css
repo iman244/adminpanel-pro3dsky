@@ -18,8 +18,9 @@
   --card-desc-fontColor: #aaa;
   --cardDownload: #f7f7f7;
   --card-smallScreen-width: 80vw;
-  --card-mediumScreen-width: calc((100vw - 165px - 4 * 30px - 1vw) / 2);
-  --card-largeScreen-width: calc((100vw - 165px - 4 * 30px - 1vw) / 4);
+  --card-576mediumScreen-width: calc((100vw - 4 * 30px - 1vw) / 2);
+  --card-768mediumScreen-width: calc((100vw - 150px - 4 * 30px - 1vw) / 2);
+  --card-largeScreen-width: calc((100vw - 150px - 4 * 30px - 1vw) / 4);
 }
 
 body {

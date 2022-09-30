@@ -5,7 +5,7 @@ export const UsersContext = createContext();
 
 const getAllUsersFetch = async (keyword = "", page = 1, limit = 1) => {
   const response = await fetch(
-    `http://${process.env.REACT_APP_NETWORKIP}/users?keyword=${keyword}&page=${page}&limit=${limit}`,
+    `${process.env.REACT_APP_NETWORKIP}/users?keyword=${keyword}&page=${page}&limit=${limit}`,
     { method: "GET", credentials: "include" }
   );
   return response.json();

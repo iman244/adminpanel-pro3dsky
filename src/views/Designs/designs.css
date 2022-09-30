@@ -59,8 +59,8 @@ a.upload-new-design {
 
 @media only screen and (min-width: 576px) {
   div.grid-container {
-    grid-template-columns: var(--card-mediumScreen-width) var(
-        --card-mediumScreen-width
+    grid-template-columns: var(--card-576mediumScreen-width) var(
+        --card-576mediumScreen-width
       );
   }
 }
@@ -68,6 +68,12 @@ a.upload-new-design {
 @media only screen and (min-width: 768px) {
   button.upload-new-design {
     display: none;
+  }
+
+  div.grid-container {
+    grid-template-columns: var(--card-768mediumScreen-width) var(
+        --card-768mediumScreen-width
+      );
   }
 }
 
