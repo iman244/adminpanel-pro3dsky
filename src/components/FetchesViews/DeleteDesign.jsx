@@ -29,7 +29,7 @@ const DeleteDesign = ({ design }) => {
 
   const DeleteDesignFetch = useMutation(
     async (id) => {
-      const url = `http://${process.env.REACT_APP_NETWORKIP}/designs/delete/${id}`;
+      const url = `${process.env.REACT_APP_NETWORKIP}/designs/delete/${id}`;
       return await fetch(url, {
         method: "DELETE",
         credentials: "include",

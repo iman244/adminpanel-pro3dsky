@@ -2,7 +2,6 @@ import axios from "axios";
 import React from "react";
 import { useContext } from "react";
 import { useState } from "react";
-import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { AppContext } from "../../Services/AppService";
@@ -67,7 +66,7 @@ const UploadDesign = () => {
   const uploadDesignFetch = useMutation(
     async (data) => {
       const response = await fetch(
-        `http://${process.env.REACT_APP_NETWORKIP}/designs/upload`,
+        `${process.env.REACT_APP_NETWORKIP}/designs/upload`,
         {
           method: "POST",
           credentials: "include",
@@ -152,8 +151,6 @@ const UploadDesign = () => {
       UserLog("error", "please select a category");
     }
   };
-
-  useEffect(() => {});
 
   return (
     <div className="fetch-container upload-design">

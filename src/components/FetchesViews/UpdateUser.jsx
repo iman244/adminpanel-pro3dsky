@@ -45,7 +45,7 @@ const UpdateUser = ({ user, setModal }) => {
   const UpdateUserFetch = useMutation(
     (data) => {
       return axios.put(
-        `http://${process.env.REACT_APP_NETWORKIP}/users/${user._id}`,
+        `${process.env.REACT_APP_NETWORKIP}/users/${user._id}`,
         data,
         {
           withCredentials: true,

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import Form from "../Form/Form";
 import { useMutation } from "react-query";
@@ -27,13 +27,10 @@ const DeleteUser = ({ user, setModal }) => {
 
   const DeleteUserFetch = useMutation(
     async (id) => {
-      return await fetch(
-        `http://${process.env.REACT_APP_NETWORKIP}/users/${id}`,
-        {
-          method: "DELETE",
-          credentials: "include",
-        }
-      );
+      return await fetch(`${process.env.REACT_APP_NETWORKIP}/users/${id}`, {
+        method: "DELETE",
+        credentials: "include",
+      });
     },
     {
       onSuccess: (data) => {
@@ -52,8 +49,6 @@ const DeleteUser = ({ user, setModal }) => {
       console.error("error in DeleteUser.jsx");
     }
   };
-
-  useEffect(() => {});
 
   return (
     <div className="fetch-container delete-user">

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { AppContext } from "../../Services/AppService";
@@ -42,7 +42,7 @@ const CreateUser = ({ setModal }) => {
   const createUserFetch = useMutation(
     (data) => {
       return axios.post(
-        `http://${process.env.REACT_APP_NETWORKIP}/users/register`,
+        `${process.env.REACT_APP_NETWORKIP}/users/register`,
         data,
         {
           withCredentials: true,
@@ -63,8 +63,6 @@ const CreateUser = ({ setModal }) => {
   const onSubmit = (data) => {
     createUserFetch.mutate(data);
   };
-
-  useEffect(() => {});
 
   return (
     <div className="fetch-container create-user">
