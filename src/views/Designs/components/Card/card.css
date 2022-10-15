@@ -1,105 +1,108 @@
 .card div.imgCard {
-  position: relative;
-  cursor: pointer;
+    position: relative;
+    cursor: pointer;
 }
 
 .card img.imgCard {
-  width: 100%;
-  height: 220px;
-  object-fit: cover;
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
 }
 
 .card div.showHide {
-  visibility: hidden;
-  opacity: 0;
-  box-sizing: border-box;
-  padding: 5%;
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  transition: all 0.4s;
+    visibility: hidden;
+    opacity: 0;
+    box-sizing: border-box;
+    padding: 5%;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.4s;
 }
 
 .card div.badge {
-  position: absolute;
-  bottom: 0;
-  z-index: 1000;
-  width: fit-content;
-  padding: 5px 15px;
-  transition: all 0.4s;
-  background: rgba(255, 255, 255, 0.7);
-  border-radius: 0 5px 0 0;
-  text-transform: uppercase;
+    position: absolute;
+    bottom: 0;
+    z-index: 1000;
+    width: fit-content;
+    padding: 5px 15px;
+    transition: all 0.4s;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 0 5px 0 0;
+    text-transform: uppercase;
 }
 
 div.badge span.pro {
-  color: var(--basic);
+    color: var(--basic);
 }
 div.badge span.free {
-  color: #379222;
+    color: #379222;
 }
 
 .card div.imgCard:hover div.showHide {
-  visibility: visible;
-  opacity: 1;
+    visibility: visible;
+    opacity: 1;
 }
 
 .card div.multiImg {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: auto;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
 }
 
 .card div.multiImg > .container {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 10px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .card img.multiImg {
-  width: 60px;
-  height: 60px;
-  object-fit: cover;
+    width: 60px;
+    height: 60px;
+    object-fit: cover;
 
-  border-radius: 50%;
-  border: 3px solid rgba(255, 255, 255, 0.4);
-  opacity: 0.7;
-  cursor: pointer;
-  transition: all 0.4s;
+    border-radius: 50%;
+    border: 3px solid rgba(255, 255, 255, 0.4);
+    opacity: 0.7;
+    cursor: pointer;
+    transition: all 0.4s;
 }
 
 .card img.multiImg:hover {
-  opacity: 1;
+    opacity: 1;
 }
 
 .card div.desc {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
 }
 
 .card span.desc {
-  padding: 1.5rem;
-  color: var(--card-desc-fontColor);
-  font-size: small;
-  white-space: nowrap;
-  text-overflow: ellipsis;
+    box-sizing: border-box;
+    padding: 1.5rem;
+    color: var(--card-desc-fontColor);
+    font-size: small;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%;
 }
 
 .card div.download {
-  width: 100%;
-  height: 66px;
-  background-color: var(--cardDownload);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    width: 100%;
+    height: 66px;
+    background-color: var(--cardDownload);
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
