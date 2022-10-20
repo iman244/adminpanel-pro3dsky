@@ -16,7 +16,9 @@ import AppService from "./Services/AppService";
 import PageNotFound from "./views/404/PageNotFound";
 
 const queryClient = new QueryClient();
-
+/*
+css sidebar, speacially front
+*/
 function App() {
     return (
         <QueryClientProvider client={queryClient}>
