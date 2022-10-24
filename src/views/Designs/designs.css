@@ -1,86 +1,86 @@
 div.content.design {
-    display: flex;
-    flex-direction: column;
-    /* gap: 3vw; */
-    box-sizing: border-box;
-    height: 100%;
-    /* justify-content: space-between; */
+  display: flex;
+  flex-direction: column;
+  /* gap: 3vw; */
+  box-sizing: border-box;
+  height: 100%;
+  /* justify-content: space-between; */
 }
 
 div.wrapper.cardList {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin-top: 20px;
-    flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 20px;
+  flex: 1;
 }
 
 div.grid-container {
-    width: fit-content;
-    display: grid;
-    gap: 30px;
-    flex: 1;
+  width: fit-content;
+  display: grid;
+  gap: 30px;
+  flex: 1;
 }
 
 div.card {
-    box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.07);
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
+  box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.07);
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
 }
 
 .textLink {
-    color: var(--basic);
-    cursor: pointer;
+  color: var(--basic);
+  cursor: pointer;
 }
 
 .textLink:hover {
-    color: var(--basicHover);
+  color: var(--basicHover);
 }
 
 a.upload-new-design {
-    text-transform: capitalize;
-    border-radius: 5px;
-    padding: 10px 15px;
-    color: #fff;
-    background-color: #4182aa;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 5px;
+  text-transform: capitalize;
+  border-radius: 5px;
+  padding: 10px 15px;
+  color: #fff;
+  background-color: #4182aa;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 @media only screen and (max-width: 576px) {
-    div.grid-container {
-        grid-template-columns: var(--card-smallScreen-width);
-    }
+  div.grid-container {
+    grid-template-columns: var(--card-smallScreen-width);
+  }
 }
 
 @media only screen and (min-width: 576px) {
-    div.grid-container {
-        grid-template-columns: var(--card-576mediumScreen-width) var(
-                --card-576mediumScreen-width
-            );
-    }
+  div.grid-container {
+    grid-template-columns: var(--card-576mediumScreen-width) var(
+        --card-576mediumScreen-width
+      );
+  }
 }
 
 @media only screen and (min-width: 768px) {
-    button.upload-new-design {
-        display: none;
-    }
+  button.upload-new-design {
+    display: none;
+  }
 
-    div.grid-container {
-        grid-template-columns: var(--card-768mediumScreen-width) var(
-                --card-768mediumScreen-width
-            );
-    }
+  div.grid-container {
+    grid-template-columns: var(--card-768mediumScreen-width) var(
+        --card-768mediumScreen-width
+      );
+  }
 }
 
 @media only screen and (min-width: 992px) {
-    div.grid-container {
-        grid-template-columns:
-            var(--card-largeScreen-width) var(--card-largeScreen-width)
-            var(--card-largeScreen-width) var(--card-largeScreen-width);
-    }
+  div.grid-container {
+    grid-template-columns:
+      var(--card-largeScreen-width) var(--card-largeScreen-width)
+      var(--card-largeScreen-width) var(--card-largeScreen-width);
+  }
 }

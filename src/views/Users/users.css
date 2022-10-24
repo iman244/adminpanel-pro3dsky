@@ -52,7 +52,7 @@ button.create-user > span {
   text-align: center;
 }
 
-ul.container {
+/* ul.container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -117,7 +117,7 @@ ul.container > li:hover > a.pagelink {
   border-color: #4182aa;
   color: white;
   cursor: pointer;
-}
+} */
 
 @media only screen and (max-width: 576px) {
   div.users-grid {
