@@ -6,6 +6,7 @@ import { useMutation } from "react-query";
 import { AppContext } from "../../Services/AppService";
 import { UsersContext } from "../../Services/UsersService";
 import Form from "../Form/Form";
+import { roleOptions } from "./roleOptions";
 
 const fields = [
   {
@@ -24,11 +25,11 @@ const fields = [
   },
   {
     id: 3,
-    type: "checkbox",
-    name: "isAdmin",
-    required: false,
-    error: "",
-    divClassName: "isAdmin",
+    type: "select",
+    name: "role",
+    required: true,
+    options: roleOptions,
+    error: "please select a role",
   },
 ];
 
@@ -36,6 +37,7 @@ const UpdateUser = ({ user, setModal }) => {
   const { UserLog } = useContext(AppContext);
   const { setUsersChanged } = useContext(UsersContext);
   const {
+    control,
     register,
     handleSubmit,
     setValue,
@@ -63,13 +65,20 @@ const UpdateUser = ({ user, setModal }) => {
   );
 
   const onSubmit = (data) => {
-    UpdateUserFetch.mutate(data);
+    const { username, password, role } = data;
+
+    const d = {
+      username,
+      password,
+      role: role ? role.value : 100,
+    };
+    UpdateUserFetch.mutate(d);
   };
 
   useEffect(() => {
     setValue("username", user.username);
     setValue("password", user.password);
-    setValue("isAdmin", user.isAdmin);
+    setValue("role", user.role);
   }, []);
 
   return (
@@ -79,7 +88,7 @@ const UpdateUser = ({ user, setModal }) => {
         <span>{user.username}</span>
       </div>
       <Form
-        use={{ register, handleSubmit, errors, onSubmit }}
+        use={{ control, register, handleSubmit, errors, onSubmit }}
         isLoading={UpdateUserFetch.isLoading}
         submitButton="update user"
         fields={fields}

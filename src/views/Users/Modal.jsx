@@ -23,6 +23,7 @@ const Modal = ({
       border: "none",
       width: "fit-content",
       height: "fit-content",
+      overflow: "visible",
     },
   };
   return (

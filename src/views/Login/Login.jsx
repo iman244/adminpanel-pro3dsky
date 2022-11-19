@@ -52,10 +52,16 @@ const Login = () => {
       <div className="wrapper-form">
         <div className="loginError">
           {LoginUserFetch.isError ? (
-            <span>you are not authorized</span>
+            <span>connection problem, please try again later</span>
+          ) : LoginUserFetch.isSuccess ? (
+            LoginUserFetch.data.status === 403 ? (
+              <span>you are not authorized</span>
+            ) : (
+              sec.isSuccess &&
+              sec.data === false && <span>you are not authorized</span>
+            )
           ) : (
-            sec.isSuccess &&
-            sec.data.data === false && <span>you are not authorized</span>
+            <></>
           )}
         </div>
         <Form

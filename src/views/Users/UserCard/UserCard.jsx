@@ -5,7 +5,7 @@ import UpdateUser from "../../../components/FetchesViews/UpdateUser";
 import DeleteUser from "../../../components/FetchesViews/DeleteUser";
 
 const UserCard = ({ user }) => {
-  const { username, password, isAdmin } = user;
+  const { username, password, role } = user;
   const [modalOpenUpdate, setModalOpenUpdate] = useState(false);
   const [modalOpenDelete, setModalOpenDelete] = useState(false);
 
@@ -25,19 +25,15 @@ const UserCard = ({ user }) => {
           </span>
         </div>
         <div className="credential-wrapper">
-          <span className="label">isAdmin:</span>
-          <span className="credential" title={`${isAdmin}`}>
-            {isAdmin ? (
-              <i
-                className="fa-solid fa-check fa-lg"
-                style={{ color: "green" }}
-              ></i>
-            ) : (
-              <i
-                className="fa-solid fa-xmark fa-lg"
-                style={{ color: "red" }}
-              ></i>
-            )}
+          <span className="label">role:</span>
+          <span className="credential">
+            {role === 100
+              ? "FREE"
+              : role === 200
+              ? "PRO"
+              : role === 300
+              ? "ADMIN"
+              : "not valid"}
           </span>
         </div>
         <div className="buttons">

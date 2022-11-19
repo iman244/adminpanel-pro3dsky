@@ -4,6 +4,7 @@ import { useMutation } from "react-query";
 import { AppContext } from "../../Services/AppService";
 import { UsersContext } from "../../Services/UsersService";
 import Form from "../Form/Form";
+import { roleOptions } from "./roleOptions";
 const axios = require("axios").default;
 
 const fields = [
@@ -23,11 +24,11 @@ const fields = [
   },
   {
     id: 3,
-    type: "checkbox",
-    name: "isAdmin",
-    required: false,
-    error: "",
-    divClassName: "isAdmin",
+    type: "select",
+    name: "role",
+    required: true,
+    options: roleOptions,
+    error: "please select a role",
   },
 ];
 
@@ -35,12 +36,14 @@ const CreateUser = ({ setModal }) => {
   const { UserLog } = useContext(AppContext);
   const { setUsersChanged } = useContext(UsersContext);
   const {
+    control,
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
   const createUserFetch = useMutation(
     (data) => {
+      console.log(data);
       return axios.post(
         `${process.env.REACT_APP_NETWORKIP}/users/register`,
         data,
@@ -61,7 +64,14 @@ const CreateUser = ({ setModal }) => {
   );
 
   const onSubmit = (data) => {
-    createUserFetch.mutate(data);
+    const { username, password, role } = data;
+
+    const d = {
+      username,
+      password,
+      role: role ? role.value : 100,
+    };
+    createUserFetch.mutate(d);
   };
 
   return (
@@ -70,7 +80,7 @@ const CreateUser = ({ setModal }) => {
         <h2>create user</h2>
       </div>
       <Form
-        use={{ register, handleSubmit, errors, onSubmit }}
+        use={{ control, register, handleSubmit, errors, onSubmit }}
         submitButton="create user"
         isLoading={createUserFetch.isLoading}
         fields={fields}

@@ -15,7 +15,9 @@ const ProtectedRoute = ({ children }) => {
     <>
       {document.cookie ? (
         sec.isSuccess ? (
+          // true ? (
           sec.data ? (
+            // true ? (
             children ? (
               children
             ) : (
@@ -28,6 +30,7 @@ const ProtectedRoute = ({ children }) => {
             </>
           )
         ) : (
+          // <Login />
           <div className="loading">
             <ReactLoading
               type={"bars"}

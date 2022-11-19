@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "react-query";
 import { AppContext } from "../../Services/AppService";
 import Form from "../Form/Form";
+import { selectOptionsDesign } from "../Form/selectOptionsDesign";
 
 const fields = [
   {
@@ -20,6 +21,7 @@ const fields = [
     type: "select",
     name: "category",
     required: true,
+    options: selectOptionsDesign,
     error: "please select a category",
   },
   {
